@@ -6,15 +6,18 @@ public class Upgrade : MonoBehaviour {
 
     public Image upgradeBar;
     public Text nLevel;
+    public Text nCoin;
     bool enabledUpgrade = false;
     bool lastUpgrade = false;
-    //la variabile experience riceve l'esperienza ottenuta dal giocatore e la gestisce facendolo salire di livello
+    //la variabile experience riceve l'esperienza ottenuta dal giocatore ed il sistema la gestisce 
+    //facendolo salire di livello ed essendagli le giuste monete
     public float experience = 350;
     float currentLevel = 100;
     float currentExperience = 0;
     float percentual = 0;
     
-    int Level = 1;
+    int Level = 0;
+    int Coin = 0;
 	
 	void Start ()
     {
@@ -49,18 +52,47 @@ public class Upgrade : MonoBehaviour {
     {
         switch (Level)
         {
-            case 2:
+            case 1:
                 currentLevel = 200;
+                Coin = 20;
+                break;
+            case 2:
+                currentLevel = 300;
+                Coin = 40;
                 break;
             case 3:
-                currentLevel = 300;
+                currentLevel = 400;
+                Coin = 60;
                 break;
             case 4:
-                currentLevel = 400;
+                currentLevel = 500;
+                Coin = 80;
                 break;
             case 5:
-                currentLevel = 500;
+                currentLevel = 600;
+                Coin = 100;
                 break;
+            case 6:
+                currentLevel = 700;
+                Coin = 120;
+                break;
+            case 7:
+                currentLevel = 800;
+                Coin = 140;
+                break;
+            case 8:
+                currentLevel = 900;
+                Coin = 160;
+                break;
+            case 9:
+                currentLevel = 1000;
+                Coin = 180;
+                break;
+            case 10:
+                currentLevel = 1100;
+                Coin = 200;
+                break;
+
 
 
         }
@@ -77,6 +109,7 @@ public class Upgrade : MonoBehaviour {
                 enabledUpgrade = false;
                 upgradeBar.fillAmount = 0;
                 nLevel.text = Level.ToString();
+                nCoin.text = Coin.ToString();
                 Experience();
             }
         }
