@@ -17,7 +17,7 @@ public class TimeBar : MonoBehaviour
         while (barTime.fillAmount > 0)
         {
             yield return new WaitForSeconds(1);
-            barTime.fillAmount -= 0.016f;
+            barTime.fillAmount -= 0.0167f;
         }
     }
 }

@@ -32,7 +32,7 @@ public class CoroutineButton : MonoBehaviour
             yield return null;
         }
     }
-
+    
     private void ChooseList()
     {
         int randomValue = Random.Range(1, 101);
@@ -46,6 +46,8 @@ public class CoroutineButton : MonoBehaviour
             this.gameObject.GetComponent<News>().isTrue = archive.listTrueNews[randomValue_2].isTrue;
             this.gameObject.GetComponent<News>().isInteresting = archive.listTrueNews[randomValue_2].isInteresting;
             this.gameObject.GetComponent<News>().titleNews = archive.listTrueNews[randomValue_2].titleNews;
+
+            archive.listTrueNews.RemoveAt(randomValue_2);
         }
 
         else
@@ -56,11 +58,13 @@ public class CoroutineButton : MonoBehaviour
             this.gameObject.GetComponent<News>().isTrue = archive.listFalseNews[randomValue_2].isTrue;
             this.gameObject.GetComponent<News>().isInteresting = archive.listFalseNews[randomValue_2].isInteresting;
             this.gameObject.GetComponent<News>().titleNews = archive.listFalseNews[randomValue_2].titleNews;
+
+            archive.listFalseNews.RemoveAt(randomValue_2);
         }
 
         // Aggiorno il testo del button
         this.gameObject.GetComponentInChildren<Text>().text = this.GetComponent<News>().titleNews;
-
+        
         // Assegno un peso
         refCalculator.CalcNewsValue(this.GetComponent<News>());
     }
