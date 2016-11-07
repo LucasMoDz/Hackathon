@@ -25,5 +25,13 @@ public class Calculator : MonoBehaviour
 	public void FinalJournalValue(News _button, CellMultiplier cell)
 	{
         int final =_button.weight * cell.value;
+        if (!_button.isTrue)
+        {
+            //dislike = final;
+        }
+        else
+        {
+            //like = final;
+        }
 	}
 }
