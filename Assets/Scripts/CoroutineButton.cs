@@ -35,7 +35,7 @@ public class CoroutineButton : MonoBehaviour
 
     private void ChooseList()
     {
-        int randomValue = Random.Range(1, 100);
+        int randomValue = Random.Range(1, 101);
 
         // 70 % scelta lista vera, 30 % scelta lista falsa
         if (randomValue <= 70)
