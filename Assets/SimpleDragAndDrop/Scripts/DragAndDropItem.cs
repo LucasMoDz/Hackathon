@@ -73,6 +73,10 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         {
             OnItemDragEndEvent(this);                                               // Notify all cells about item drag end
         }
+		GameObject child = draggedItem.transform.GetChild(0).gameObject;
+		GameObject parentCell = draggedItem.transform.parent.gameObject;
+		draggedItem.GetComponent<RectTransform> ().sizeDelta = parentCell.GetComponent<RectTransform> ().sizeDelta;
+		child.GetComponent<RectTransform> ().sizeDelta = parentCell.GetComponent<RectTransform> ().sizeDelta;
         draggedItem = null;
         icon = null;
         sourceCell = null;
