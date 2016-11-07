@@ -15,7 +15,7 @@ public class NewsChoosedController : MonoBehaviour
     {
         gm.newsChoosed.Add(EventSystem.current.currentSelectedGameObject.gameObject);
         EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<CoroutineButton>().StopAllCoroutines();
-
+        
         EventSystem.current.currentSelectedGameObject.GetComponentInChildren<Text>().fontStyle = FontStyle.Bold;
         EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<Button>().interactable = false;
     }
