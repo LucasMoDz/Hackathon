@@ -2,7 +2,7 @@
 
 public class Calculator : MonoBehaviour
 {
-
+    // Calcola il peso della singola news
 	public void CalcNewsValue(News _button)
     {
         if (_button.isTrue && _button.isInteresting)
@@ -21,8 +21,9 @@ public class Calculator : MonoBehaviour
         }
     }
 
-	public void JournalValue()
+    // Moltiplica il peso della news con il moltiplicatore della cella sul Journal
+	public void FinalJournalValue(News _button, CellMultiplier cell)
 	{
-        
+        int final =_button.weight * cell.value;
 	}
 }

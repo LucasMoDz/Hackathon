@@ -3,15 +3,17 @@ using System.Collections;
 
 public class CellMultiplier : MonoBehaviour {
 
-	public float value;
+	public int value;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 	
 	}
 }
