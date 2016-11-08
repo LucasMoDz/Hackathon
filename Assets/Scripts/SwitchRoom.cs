@@ -28,7 +28,7 @@ public class SwitchRoom : MonoBehaviour
         titleDrafting[3] = "Economia";
 
         //text.text = titleDrafting[0];
-        refGM.descrizioneRoom.GetComponent<Text>().text = titleDrafting[0];
+        //refGM.descrizioneRoom.GetComponent<Text>().text = titleDrafting[0];
     }
 
     public void RotateClockwise()
@@ -83,7 +83,7 @@ public class SwitchRoom : MonoBehaviour
 
     private void RefreshTextTite()
     {
-        refGM.descrizioneRoom.GetComponent<Text>().text = titleDrafting[index];
+        //refGM.descrizioneRoom.GetComponent<Text>().text = titleDrafting[index];
         //text.text = titleDrafting[index];
     }
 
