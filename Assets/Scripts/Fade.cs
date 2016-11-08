@@ -3,32 +3,35 @@ using System.Collections;
 
 public class Fade : MonoBehaviour
 {
-    public void FadeIn(CanvasGroup _canvasGroup)
+
+	public float fadeValue = 0.02f;
+
+    public void FadeIn()
     {
-        StartCoroutine(FadeInCO(_canvasGroup));
+        StartCoroutine(FadeInCO());
     }
 
-    public void FadeOut(CanvasGroup _canvasGroup)
+    public void FadeOut()
     {
-        StartCoroutine(FadeOutCO(_canvasGroup));
+        StartCoroutine(FadeOutCO());
     }
 
-    private IEnumerator FadeInCO(CanvasGroup _canvasGroup)
+    private IEnumerator FadeInCO()
     {
-        while (_canvasGroup.alpha < 1)
+		while (this.gameObject.GetComponent<CanvasGroup>().alpha < 1)
         {
-            _canvasGroup.alpha += 0.001f;
+			this.gameObject.GetComponent<CanvasGroup>().alpha += fadeValue;
             yield return null;
         }
 
         yield break;
     }
 
-    private IEnumerator FadeOutCO(CanvasGroup _canvasGroup)
+    private IEnumerator FadeOutCO()
     {
-        while (_canvasGroup.alpha > 0)
+		while (this.gameObject.GetComponent<CanvasGroup>().alpha > 0)
         {
-            _canvasGroup.alpha -= 0.001f;
+			this.gameObject.GetComponent<CanvasGroup>().alpha -= fadeValue;
             yield return null;
         }
 

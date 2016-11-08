@@ -20,6 +20,7 @@ public class NewsChoosedController : MonoBehaviour
         //refSC.audioSource.Play();
 
         gm.buttonClicked++;
+		Debug.Log (" " + gm.buttonClicked);
 
         gm.newsChoosed.Add(EventSystem.current.currentSelectedGameObject.gameObject);
 
