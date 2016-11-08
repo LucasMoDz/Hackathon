@@ -25,6 +25,7 @@ public class PopUp : MonoBehaviour {
     public void AddCoin()
     {
         addCoinText.text = coinInButton.ToString();
+        this.gameObject.SetActive(false);
     }
 
     public void PopUpActive()
