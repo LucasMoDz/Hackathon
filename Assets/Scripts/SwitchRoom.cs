@@ -1,86 +1,105 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
+// VA INSERITO IN VECTORUP
 public class SwitchRoom : MonoBehaviour
 {
+    private GameManager refGM;
 
-    public GameObject fatherRoom;
-    public bool switchEnabled = false;
-    Transform targetTr;
-    int focus = 1;
-    public Transform Dx;
-    public Transform Sx;
-    public Transform Center;
+    public Text text;
 
+    private GameObject room;
+    private int angleRotation = 90;
+    private bool isMoving;
 
+    private int index = 0;
 
-    void Start()
+    private string[] titleDrafting = new string[4];
+
+    private void Awake()
     {
-        //transform.position = Vector3.Lerp(transform.position, fatherRoom.transform.GetChild(0).position, Time.deltaTime / 2);
+        room = this.gameObject;
+        refGM = FindObjectOfType<GameManager>();
 
-        targetTr = Center;
-       // StartCoroutine(Switch());
+        titleDrafting[0] = "Cronaca";
+        titleDrafting[1] = "Sport";
+        titleDrafting[2] = "Intrattenimento";
+        titleDrafting[3] = "Economia";
+
+        //text.text = titleDrafting[0];
+        refGM.descrizioneRoom.GetComponent<Text>().text = titleDrafting[0];
     }
 
-
-
-    IEnumerator Switch()
+    public void RotateClockwise()
     {
-        switchEnabled = true;
-
-        yield return new WaitForSeconds(2);
-
-        switchEnabled = false;
-
-
+        if (!isMoving)
+            StartCoroutine(RotateClockwiseCO());
     }
 
-    public void DxButton()
+    public void RotateCounterClockwise()
     {
-        if (focus == 2 && switchEnabled == false)
-        {
-            focus = 1;
-            targetTr = Center;
-            StartCoroutine(Switch());
-
-        }
-        else if (focus == 1 && switchEnabled == false)
-        {
-            focus = 0;
-            targetTr = Dx;
-            StartCoroutine(Switch());
-
-        }
-
+        if (!isMoving)
+            StartCoroutine(RotateCounterClockwiseCO());
     }
 
-    public void SxButton()
+    public IEnumerator RotateClockwiseCO()
     {
-        if (focus == 0 && switchEnabled == false)
-        {
-            focus = 1;
-            targetTr = Center;
-            StartCoroutine(Switch());
+        IndexIncrease();
+        RefreshTextTite();
 
-        }
-        else if (focus == 1 && switchEnabled == false)
+        while (angleRotation != 0)
         {
-            focus = 2;
-            targetTr = Sx;
-            StartCoroutine(Switch());
+            isMoving = true;
+            room.transform.Rotate(room.transform.up, 1);
+            angleRotation -= 1;
 
+            yield return null;
         }
 
+        isMoving = false;
+        angleRotation = 90;
+        yield break;
     }
 
-    void Update()
+    public IEnumerator RotateCounterClockwiseCO()
     {
+        IndexDecrease();
+        RefreshTextTite();
 
+        while (angleRotation != 0)
+        {
+            isMoving = true;
+            room.transform.Rotate(room.transform.up, -1);
+            angleRotation -= 1;
 
-        if (switchEnabled == true)
-            transform.position = Vector3.Lerp(transform.position, targetTr.position, Time.deltaTime / 2);
+            yield return null;
+        }
 
+        isMoving = false;
+        angleRotation = 90;
+        yield break;
+    }
 
+    private void RefreshTextTite()
+    {
+        refGM.descrizioneRoom.GetComponent<Text>().text = titleDrafting[index];
+        //text.text = titleDrafting[index];
+    }
 
+    private void IndexIncrease()
+    {
+        if (index != titleDrafting.Length - 1)
+            index++;
+        else
+            index = 0;
+    }
+
+    private void IndexDecrease()
+    {
+        if (index != 0)
+            index--;
+        else
+            index = titleDrafting.Length - 1;
     }
 }
