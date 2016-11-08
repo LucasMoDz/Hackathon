@@ -6,18 +6,18 @@ public class NewsChoosedController : MonoBehaviour
 {
     private GameManager gm;
     private Archive archive;
-    //private SoundController refSC;
+    private SoundController refSC;
 
     private void Awake()
     {
         gm = FindObjectOfType<GameManager>();
         archive = FindObjectOfType<Archive>();
-        //refSC = FindObjectsOfType<SoundController>();
+        refSC = FindObjectOfType<SoundController>();
     }
 
     public void SaveButton()
     {
-        //refSC.audioSource.Play();
+        refSC.audioSource.Play();
 
         gm.buttonClicked++;
 		Debug.Log (" " + gm.buttonClicked);
