@@ -7,18 +7,32 @@ public class CoroutineButton : MonoBehaviour
     private Archive archive;
     private Calculator refCalculator;
     private GameManager refGM;
+    
+    private bool test;
 
-    public int randomValue_2;
+    private int sizeListTrue, sizeListFalse;
+    private float random_second;
+    public int randomValue_true;
+    public int randomValue_false;
 
     private void Awake()
     {
         archive = FindObjectOfType<Archive>();
         refCalculator = FindObjectOfType<Calculator>();
         refGM = FindObjectOfType<GameManager>();
+
+        random_second = Random.Range(4, 8);
     }
 
     void Update()
     {
+        sizeListFalse = archive.listFalseNews.Count - 1;
+        sizeListTrue = archive.listTrueNews.Count - 1;
+        
+        // Aggiorno i valori random secondo la lunghezza della lista aggiornata
+        randomValue_true = Random.Range(0, sizeListTrue);
+        randomValue_false = Random.Range(0, sizeListFalse);
+
         if (refGM.AllButtonsAreClicked())
         {
             refGM.Feedback();
@@ -30,18 +44,25 @@ public class CoroutineButton : MonoBehaviour
     {
         StartCoroutine(Spawn());
     }
-
+    
     public IEnumerator Spawn()
     {
         while (true)
         {
-            this.gameObject.SetActive(true);
+            // Soltanto la prima volta
+            if (!test)
+            {
+                yield return new WaitForSeconds(0.1f);
+                this.gameObject.SetActive(true);
+                ChooseList();
+                test = true;
+            }
+            
+            yield return new WaitForSeconds(random_second);
 
             ChooseList();
+            random_second = Random.Range(4, 8);
             
-            float random = Random.Range(4, 8);
-
-            yield return new WaitForSeconds(random);
             yield return null;
         }
     }
@@ -53,25 +74,19 @@ public class CoroutineButton : MonoBehaviour
         // 70 % scelta lista vera, 30 % scelta lista falsa
         if (randomValue <= 70)
         {
-            randomValue_2 = Random.Range(0, archive.listTrueNews.Count);
-
             // Lista vera
-            this.gameObject.GetComponent<News>().isTrue = archive.listTrueNews[randomValue_2].isTrue;
-            this.gameObject.GetComponent<News>().isInteresting = archive.listTrueNews[randomValue_2].isInteresting;
-            this.gameObject.GetComponent<News>().titleNews = archive.listTrueNews[randomValue_2].titleNews;
+            this.gameObject.GetComponent<News>().isTrue = archive.listTrueNews[randomValue_true].isTrue;
+            this.gameObject.GetComponent<News>().isInteresting = archive.listTrueNews[randomValue_true].isInteresting;
+            this.gameObject.GetComponent<News>().titleNews = archive.listTrueNews[randomValue_true].titleNews;
         }
-
         else
         {
-            randomValue_2 = Random.Range(0, archive.listFalseNews.Count);
-
             // Lista falsa
-            this.gameObject.GetComponent<News>().isTrue = archive.listFalseNews[randomValue_2].isTrue;
-            this.gameObject.GetComponent<News>().isInteresting = archive.listFalseNews[randomValue_2].isInteresting;
-            this.gameObject.GetComponent<News>().titleNews = archive.listFalseNews[randomValue_2].titleNews;
+            this.gameObject.GetComponent<News>().isTrue = archive.listFalseNews[randomValue_false].isTrue;
+            this.gameObject.GetComponent<News>().isInteresting = archive.listFalseNews[randomValue_false].isInteresting;
+            this.gameObject.GetComponent<News>().titleNews = archive.listFalseNews[randomValue_false].titleNews;
         }
 
-        // Aggiorno il testo del button
         this.gameObject.GetComponentInChildren<Text>().text = this.GetComponent<News>().titleNews;
         
         // Assegno un peso
