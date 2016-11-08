@@ -13,10 +13,12 @@ public class GameManager : MonoBehaviour
 	public Canvas canvasNews;
 
 	public GameObject publishButton;
+	public GameObject descrizioneRoom;
 
     public int buttonClicked;
     private const int TOTAL_NUMBER_OF_BUTTONS = 5;
-    
+	public int newsAttachedCount;
+
     public bool AllButtonsAreClicked()
     {
         if (buttonClicked == TOTAL_NUMBER_OF_BUTTONS)
@@ -25,6 +27,16 @@ public class GameManager : MonoBehaviour
             return false;
     }
 
+
+	void Update () {
+		if (newsAttachedCount == 5) {
+			newsAttachedCount = 0;
+			for (int i = 0; i <= cellNewsList.Count - 1; i++) {
+				cellNewsList [i].SetActive (false);
+			}
+			publishButton.SetActive (true);
+		}
+	}
 
 	public void StartPlay () {
 		//Chiamato dal bottne start attiva e fa comparire il CanvasNews

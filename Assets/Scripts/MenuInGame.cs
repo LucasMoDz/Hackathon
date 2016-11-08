@@ -16,19 +16,21 @@ public class MenuInGame : MonoBehaviour {
     // Mette in pausa
     public void Pause()
     {
+        refSound.audioSource.Play();
+
         Time.timeScale = 0;
         panelPause.SetActive(true);
         pauseButton.SetActive(false);
-        refSound.audioSource.Play();
     }
 
     // Riprende il gioco
     public void Resume()
     {
+        refSound.audioSource.Play();
         Time.timeScale = 1;
         panelPause.SetActive(false);
         pauseButton.SetActive(true);
-        refSound.audioSource.Play();
+        
     }
 
     // Esce e torna al Main Menu
