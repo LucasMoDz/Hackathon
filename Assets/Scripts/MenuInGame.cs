@@ -6,16 +6,12 @@ using UnityEngine.SceneManagement;
 public class MenuInGame : MonoBehaviour {
 
     public GameObject panelPause, pauseButton;
+    SoundController refSound;
 
-    void Start ()
+    private void Start()
     {
-	    
-	}
-	
-	void Update ()
-    {
-	    
-	}
+        refSound = FindObjectOfType<SoundController>();
+    }
 
     // Mette in pausa
     public void Pause()
@@ -23,7 +19,7 @@ public class MenuInGame : MonoBehaviour {
         Time.timeScale = 0;
         panelPause.SetActive(true);
         pauseButton.SetActive(false);
-
+        refSound.audioSource.Play();
     }
 
     // Riprende il gioco
@@ -32,7 +28,7 @@ public class MenuInGame : MonoBehaviour {
         Time.timeScale = 1;
         panelPause.SetActive(false);
         pauseButton.SetActive(true);
-
+        refSound.audioSource.Play();
     }
 
     // Esce e torna al Main Menu

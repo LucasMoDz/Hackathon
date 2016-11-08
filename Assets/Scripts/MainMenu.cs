@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
-
 	
 	public void NewGame ()
     {
@@ -21,5 +20,5 @@ public class MainMenu : MonoBehaviour {
         SceneManager.LoadScene("MainMenu");
     }
 
-   
+
 } 
