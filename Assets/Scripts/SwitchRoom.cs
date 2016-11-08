@@ -22,13 +22,13 @@ public class SwitchRoom : MonoBehaviour
         room = this.gameObject;
         refGM = FindObjectOfType<GameManager>();
 
-        titleDrafting[0] = "Cronaca";
-        titleDrafting[1] = "Sport";
-        titleDrafting[2] = "Intrattenimento";
-        titleDrafting[3] = "Economia";
+        titleDrafting[0] = "ECONOMIA";
+        titleDrafting[1] = "SPORT";
+        titleDrafting[2] = "CRONACA";
+        titleDrafting[3] = "INTRATTENIMENTO";
 
         //text.text = titleDrafting[0];
-        //refGM.descrizioneRoom.GetComponent<Text>().text = titleDrafting[0];
+        refGM.descrizioneRoom.GetComponent<Text>().text = titleDrafting[0];
     }
 
     public void RotateClockwise()
@@ -83,7 +83,7 @@ public class SwitchRoom : MonoBehaviour
 
     private void RefreshTextTite()
     {
-        //refGM.descrizioneRoom.GetComponent<Text>().text = titleDrafting[index];
+        refGM.descrizioneRoom.GetComponent<Text>().text = titleDrafting[index];
         //text.text = titleDrafting[index];
     }
 

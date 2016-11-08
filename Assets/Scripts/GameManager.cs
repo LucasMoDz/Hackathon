@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
@@ -19,6 +20,9 @@ public class GameManager : MonoBehaviour
     private const int TOTAL_NUMBER_OF_BUTTONS = 5;
 	public int newsAttachedCount;
 
+	int like, dislike;
+	bool test = false;
+
     public bool AllButtonsAreClicked()
     {
         if (buttonClicked == TOTAL_NUMBER_OF_BUTTONS)
@@ -36,18 +40,19 @@ public class GameManager : MonoBehaviour
 			}
 			publishButton.SetActive (true);
 		}
+
+
+		if (AllButtonsAreClicked() && !test)
+		{
+			EndNewsPhase();
+			test = true;
+			//StopAllCoroutines();
+		}
 	}
 
 	public void StartPlay () {
-		//Chiamato dal bottne start attiva e fa comparire il CanvasNews
-		//Starta l'apparizione delle notizie
-		//Spegne il CanvasMain
-		canvasMain.GetComponent<CanvasGroup>().interactable = false;
-		canvasMain.GetComponent<CanvasGroup>().blocksRaycasts = false;
-
-		canvasMain.GetComponent<Fade>().FadeOut();
-		canvasNews.gameObject.SetActive(true);
-		canvasNews.GetComponent<Fade>().FadeIn();
+		//Chiamato dal bottone start attiva e fa comparire il CanvasNews
+		StartCoroutine(PlayCoroutine());
 
 	}
 
@@ -55,14 +60,21 @@ public class GameManager : MonoBehaviour
     public void EndNewsPhase()
     {
 		Debug.Log ("FASE SCELTA NEWS FINITA");
+		StartCoroutine(JournalPhase());
+
+    }
+
+
+	public IEnumerator JournalPhase () {
 		//Fade Out della schermata di scelta news
 		canvasNews.GetComponent<Fade>().FadeOut();
+		yield return new WaitForSeconds (1f);
 
+		//yield return null;
 
 		//Fade In della schermata di impaginazione con il giornale
 		canvasJournal.gameObject.SetActive(true);
 		canvasJournal.GetComponent<Fade>().FadeIn();
-
 
 		//Stoppare le coroutine di tutti i bottoni soprattutto se alcuni non sono stati cliccati
 		//Spostare tutti i bottoni imparentandoli alle celle e assegnandone la stessa dimensione. 
@@ -81,8 +93,52 @@ public class GameManager : MonoBehaviour
 			buttonList [i].AddComponent<DragAndDropItem>();
 			Debug.Log ("Il bottone: " + buttonList [i].gameObject.name + " ha completato il setting");
 		}
-			
+		canvasNews.gameObject.SetActive(false);
+
+	}
 
 
-    }
+	public void PointCalculator () {
+		
+		StartCoroutine(CalcCoroutine());
+
+	}
+
+
+	public IEnumerator CalcCoroutine () {
+		//Fade Out del Canvas Journal
+		//Fade In del CanvasResults
+		//Prendere i valori dai bottoni delle news moltiplicarli per il valore multiplier delle celle in cui si trovano
+		//I punteggi positivi andranno in like e quelli negativi in dislike.
+		//Passare i valori all'interfaccia in CanvasResults
+
+		canvasJournal.GetComponent<Fade>().FadeOut();
+		yield return new WaitForSeconds (1f);
+		canvasJournal.gameObject.SetActive(false);
+
+
+
+		//Fa apparire il CanvasMain
+		canvasMain.GetComponent<Fade>().FadeIn();
+
+		canvasMain.GetComponent<CanvasGroup>().interactable = true;
+		canvasMain.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+	}
+
+
+	public IEnumerator PlayCoroutine () {
+		//Starta l'apparizione delle notizie
+		//Spegne il CanvasMain
+		canvasMain.GetComponent<CanvasGroup>().interactable = false;
+		canvasMain.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+		canvasMain.GetComponent<Fade>().FadeOut();
+		yield return new WaitForSeconds (1f);
+
+		canvasNews.gameObject.SetActive(true);
+		canvasNews.GetComponent<Fade>().FadeIn();
+
+
+	}
 }

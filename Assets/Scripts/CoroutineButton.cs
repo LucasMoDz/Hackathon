@@ -33,11 +33,7 @@ public class CoroutineButton : MonoBehaviour
         randomValue_true = Random.Range(0, sizeListTrue);
         randomValue_false = Random.Range(0, sizeListFalse);
 
-        if (refGM.AllButtonsAreClicked())
-        {
-			refGM.EndNewsPhase();
-            StopAllCoroutines();
-        }
+        
     }
 
     private void Start()
@@ -61,7 +57,7 @@ public class CoroutineButton : MonoBehaviour
             yield return new WaitForSeconds(random_second);
 
             ChooseList();
-            random_second = Random.Range(4, 8);
+            random_second = Random.Range(6, 9);
             
             yield return null;
         }
