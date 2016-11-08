@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 	public Canvas canvasJournal;
 	public Canvas canvasNews;
 
+	public GameObject publishButton;
+
     public int buttonClicked;
     private const int TOTAL_NUMBER_OF_BUTTONS = 5;
     
