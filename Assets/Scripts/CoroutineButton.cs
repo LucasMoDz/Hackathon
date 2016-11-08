@@ -21,7 +21,7 @@ public class CoroutineButton : MonoBehaviour
     {
         if (refGM.AllButtonsAreClicked())
         {
-            refGM.Feedback();
+			refGM.EndNewsPhase();
             StopAllCoroutines();
         }
     }

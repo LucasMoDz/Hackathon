@@ -20,6 +20,7 @@ public class NewsChoosedController : MonoBehaviour
         //refSC.audioSource.Play();
 
         gm.buttonClicked++;
+		Debug.Log (" " + gm.buttonClicked);
 
         if (!EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<News>().isTrue)
             archive.listFalseNews.RemoveAt(EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<CoroutineButton>().randomValue_2);

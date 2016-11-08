@@ -26,7 +26,7 @@ public class TimeBar : MonoBehaviour
             barTime.fillAmount -= 0.0167f;
         }
 
-        refGameManager.Feedback();
+		refGameManager.EndNewsPhase();
         yield break;
     }
 }
