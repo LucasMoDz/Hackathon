@@ -1,9 +1,10 @@
 using UnityEngine;
 
+
 public class RSSTester : MonoBehaviour
 {
 	RSSReader rssEconomy, rssSport, rssReport, rssEntertainment;
-
+    
     void Start ()
 	{
 		// Si collega al FeedRss del Corriere
@@ -16,33 +17,39 @@ public class RSSTester : MonoBehaviour
         // Stampa le notizie
         foreach (RSSReader.News news in rssEconomy.channelNews.newsList)
 		{
-			Debug.Log("Item Title: " + news.title);
-			Debug.Log("Item link: " + news.link);
-			Debug.Log("Item description: " + news.description);
+            
+
+            Debug.Log("Item Title: " + news.title.Replace("\n", "").Replace("\r", "").Replace("\t", ""));
+			//Debug.Log("Item link: " + news.link);
+			//Debug.Log("Item description: " + news.description);
             Debug.Log("\n");
 		}
 
         foreach (RSSReader.News news in rssSport.channelNews.newsList)
         {
-            Debug.Log("Item Title: " + news.title);
-            Debug.Log("Item link: " + news.link);
-            Debug.Log("Item description: " + news.description);
+            
+
+            Debug.Log("Item Title: " + news.title.Replace("\n", "").Replace("\r", "").Replace("\t", ""));
+            //Debug.Log("Item link: " + news.link);
+            //Debug.Log("Item description: " + news.description);
             Debug.Log("\n");
         }
 
         foreach (RSSReader.News news in rssReport.channelNews.newsList)
         {
-            Debug.Log("Item Title: " + news.title);
-            Debug.Log("Item link: " + news.link);
-            Debug.Log("Item description: " + news.description);
+            
+            Debug.Log("Item Title: " + news.title.Replace("\n", "").Replace("\r", "").Replace("\t", ""));
+            //Debug.Log("Item link: " + news.link);
+            //Debug.Log("Item description: " + news.description);
             Debug.Log("\n");
         }
 
         foreach (RSSReader.News news in rssEntertainment.channelNews.newsList)
         {
-            Debug.Log("Item Title: " + news.title);
-            Debug.Log("Item link: " + news.link);
-            Debug.Log("Item description: " + news.description);
+  
+            Debug.Log("Item Title: " + news.title.Replace("\n", "").Replace("\r", "").Replace("\t", ""));
+            //Debug.Log("Item link: " + news.link);
+            //Debug.Log("Item description: " + news.description);
             Debug.Log("\n");
         }
     }
