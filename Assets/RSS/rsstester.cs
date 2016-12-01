@@ -45,5 +45,17 @@ public class RSSTester : MonoBehaviour
             Debug.Log("Item description: " + news.description);
             Debug.Log("\n");
         }
+
+        PolishString();
+    }
+
+    private void PolishString()
+    {
+        string test = "Bella notizia dir&ei";
+        
+        int index = test.IndexOf('&');
+        test = test.Remove(index, 1);
+
+        Debug.Log(test);
     }
 }
