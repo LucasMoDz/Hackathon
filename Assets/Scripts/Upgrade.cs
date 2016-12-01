@@ -11,14 +11,14 @@ public class Upgrade : MonoBehaviour {
     bool lastUpgrade = false;
     
     //la variabile experience riceve l'esperienza ottenuta dal giocatore ed il sistema la gestisce 
-    //facendolo salire di livello ed essendagli le giuste monete
+    //facendolo salire di livello ed essegnandogli le giuste monete
     public float experience = 350;
     float currentLevel = 100;
     float currentExperience = 0;
     float percentual = 0;
     
     int Level = 0;
-    int Coin = 0;
+    public int Coin = 0;
     public GameObject pUp;
     public Text pUpText;
 
@@ -115,7 +115,7 @@ public class Upgrade : MonoBehaviour {
                 enabledUpgrade = false;
                 upgradeBar.fillAmount = 0;
                 nLevel.text = Level.ToString();
-                nCoin.text = Coin.ToString();
+                //nCoin.text = Coin.ToString();
                 Experience();
             }
         }
@@ -129,6 +129,7 @@ public class Upgrade : MonoBehaviour {
 
             {
                 lastUpgrade = false;
+                
                 pUp.GetComponent<PopUp>().PopUpActive();
                 pUp.GetComponent<PopUp>().coinInButton = Coin;
                 pUpText.text = Coin.ToString();

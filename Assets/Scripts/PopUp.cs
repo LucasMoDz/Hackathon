@@ -11,13 +11,19 @@ public class PopUp : MonoBehaviour {
     bool move = false;
     public int coinInButton = 0;
     public Text addCoinText;
-    
+    public Text nText;
+   
+
+
 
     void Start ()
     {
         targetTr = A.transform;
-       // PopUpActive();
+        this.GetComponent<Image>().enabled = false;
+        this.GetComponentInChildren<Text>().enabled = false;
+        // PopUpActive();
        
+
 
 
     }
@@ -32,6 +38,8 @@ public class PopUp : MonoBehaviour {
     {
         if (move == false)
         {
+            this.GetComponent<Image>().enabled = true;
+            this.GetComponentInChildren<Text>().enabled = true;
             move = true;
             StartCoroutine(stopPopUp());
         }
@@ -43,6 +51,13 @@ public class PopUp : MonoBehaviour {
 
         move = false;
         targetTr = A.transform;
+
+        yield return new WaitForSeconds(1f);
+
+        this.GetComponent<Image>().enabled = false;
+        this.GetComponentInChildren<Text>().enabled = false;
+        nText.text = coinInButton.ToString(); 
+        
     }
 	
 	void Update ()
