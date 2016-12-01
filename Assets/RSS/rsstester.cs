@@ -52,5 +52,18 @@ public class RSSTester : MonoBehaviour
             //Debug.Log("Item description: " + news.description);
             Debug.Log("\n");
         }
+
+        PolishString();
+    }
+
+    private void PolishString()
+    {
+        string news = "Notizia del Corriere De&ABlla Sera";
+        string charToRemove = "&AB";
+
+        int index = news.IndexOf(charToRemove);
+        news = news.Remove(index, charToRemove.Length);
+
+        Debug.Log(news);
     }
 }
