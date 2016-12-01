@@ -1,95 +1,100 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 
-public class rssreader
+public class RSSReader
 {
-	XmlTextReader rssReader;
-	XmlDocument rssDoc;
+    private const string RSS_STRING = "rss";
+    private const string CHANNEL_STRING = "channel";
+    private const string ITEM_STRING = "item";
+
+    private const string TITLE_PARAM = "title";
+    private const string LINK_PARAM = "link";
+    private const string DESCRIPTION_PARAM = "description";
+
+    XmlTextReader rssReader;
+	XmlDocument xmlDoc;
+
 	XmlNode nodeRss;
 	XmlNode nodeChannel;
 	XmlNode nodeItem;
-	public channel rowNews;
+
+	public Channel channelNews;
 	
-	// this is the root channel information within the RSS
-	// I have supplied the fields here that are in the UNITY RSS feed
-	public struct channel
+	// Channel padre di tutte le news (item)
+	public struct Channel
 	{
 		public string title;
 		public string link;
-		public string description;
-		public string docs;
-		public string managingEditor;
-		public string webMaster;
-		public string lastBuildDate;
-        // this is our collection of RSS items
-		public List<items> item;
+		public List<News> newsList;
 	}
 	
-	// again, all values here are the same as what exists in the UNITY RSS feed
-	public struct items
+	// Le info di ogni news
+	public struct News
 	{
 		public string title;
-		public string category;
-		public string creator;
-		public string guid;
 		public string link;
-		public string pubDate;
 		public string description;
 	}	
 	
-	// our constructor takes the URL to the feed
-	public rssreader (string feedURL)
+	// Costruttore che richiede l'URL come parametro
+	public RSSReader (string _feedURL)
 	{
-		// setup the channel structure
-		rowNews = new channel ();
-        // make the list available to write to
-		rowNews.item = new List<items>();
-		rssReader = new XmlTextReader (feedURL);
-		rssDoc = new XmlDocument ();
-		rssDoc.Load (rssReader);
-		// Loop for the <rss> tag
-		for (int i = 0; i < rssDoc.ChildNodes.Count; i++) 
-		{
-			// If it is the rss tag
-			if (rssDoc.ChildNodes[i].Name == "rss") {
-				// <rss> tag found
-				nodeRss = rssDoc.ChildNodes[i];
-			}
-		}
-		// Loop for the <channel> tag
-		for (int i = 0; i < nodeRss.ChildNodes.Count; i++) {
-			// If it is the channel tag
-			if (nodeRss.ChildNodes[i].Name == "channel") {
-				// <channel> tag found
-				nodeChannel = nodeRss.ChildNodes[i];
-			}
-		}
-		// this is our channel header information
-		rowNews.title = nodeChannel["title"].InnerText;
-		rowNews.link = nodeChannel["link"].InnerText;
-		rowNews.description = nodeChannel["description"].InnerText;
-		rowNews.docs = nodeChannel["docs"].InnerText;
-		rowNews.lastBuildDate = nodeChannel["lastBuildDate"].InnerText;
-		rowNews.managingEditor = nodeChannel["managingEditor"].InnerText;
-		rowNews.webMaster = nodeChannel["webMaster"].InnerText;
+		// Crea nuovo Channel
+		channelNews = new Channel ();
 
-		// here we have our feed items
-		for (int i = 0; i < nodeChannel.ChildNodes.Count; i++) {
-			if (nodeChannel.ChildNodes[i].Name == "item") {
+        // Inizializza la lista all'interno della struct Channel
+		channelNews.newsList = new List<News>();
+
+        // Crea un nuovo Reader XML
+		rssReader = new XmlTextReader(_feedURL);
+
+        // Crea un nuovo documento XML
+		xmlDoc = new XmlDocument();
+
+        // Carica i dati dell'rssReader
+        xmlDoc.Load(rssReader);
+
+		// xmlDoc.ChildNodes.Count è il numero di RSS presente nel Feed
+		for (int i = 0; i < xmlDoc.ChildNodes.Count; i++) 
+		{
+			// Apre la sezione RSS
+			if (xmlDoc.ChildNodes[i].Name == RSS_STRING)
+				nodeRss = xmlDoc.ChildNodes[i];
+		}
+
+		// nodeRss.ChildNodes.Count è il numero di Channel presenti nel Feed
+		for (int i = 0; i < nodeRss.ChildNodes.Count; i++)
+        {
+			// Apre la sezione Channel
+			if (nodeRss.ChildNodes[i].Name == CHANNEL_STRING)
+				nodeChannel = nodeRss.ChildNodes[i];
+		}
+
+		// Sono le info del Channel
+		channelNews.title = nodeChannel[TITLE_PARAM].InnerText;
+		channelNews.link = nodeChannel[LINK_PARAM].InnerText;
+
+		// nodeChannel.ChildNodes.Count è il numero di item presenti nel Feed
+		for (int i = 0; i < nodeChannel.ChildNodes.Count; i++)
+        {
+            // Confronta il nome dei figli di Channel 
+			if (nodeChannel.ChildNodes[i].Name == ITEM_STRING)
+            {
+                // Se è una notizia (item) la mette dentro un nodo
 				nodeItem = nodeChannel.ChildNodes[i];
-				// create an empty item to fill
-				items itm = new items();
-				itm.title = nodeItem["title"].InnerText;
-				itm.link = nodeItem["link"].InnerText;
-				itm.category = nodeItem["category"].InnerText;
-				itm.creator = nodeItem["dc:creator"].InnerText;
-				itm.guid = nodeItem["guid"].InnerText;
-				itm.pubDate = nodeItem["pubDate"].InnerText;
-				itm.description = nodeItem["description"].InnerText;
-				// add the item to the channel items list
-				rowNews.item.Add(itm);
+
+                // Crea una nuova notizia
+				News item = new News();
+
+                // Assegna il titolo della notizia
+				item.title = nodeItem[TITLE_PARAM].InnerText;
+                // Assegna il link della notizia
+				item.link = nodeItem[LINK_PARAM].InnerText;
+                // Assegna la descrizione della notizia
+                item.description = nodeItem[DESCRIPTION_PARAM].InnerText;
+
+                // Aggiunge la notizia creata alla lista di notizie
+                channelNews.newsList.Add(item);
 			}
 		}
 	}
