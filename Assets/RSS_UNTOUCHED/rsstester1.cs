@@ -3,12 +3,12 @@ using System.Collections;
 
 public class rsstester1 : MonoBehaviour
 {
-	rssreader rdr;
+	rssreader1 rdr;
 	// Use this for initialization
 	void Start ()
 	{
 		// connect to the rss feed and pull it
-		rdr = new rssreader("http://forum.unity3d.com/rss.php");
+		rdr = new rssreader1("http://forum.unity3d.com/rss.php");
 
 		// show feed header
 		Debug.Log("Title: "+rdr.rowNews.title);
@@ -20,7 +20,7 @@ public class rsstester1 : MonoBehaviour
 		Debug.Log("Web Master: " + rdr.rowNews.webMaster);
 
 		// now display the feed items
-		foreach(rssreader.items itm in rdr.rowNews.item)
+		foreach(rssreader1.items itm in rdr.rowNews.item)
 		{
 			Debug.Log("Item Title: " + itm.title);
 			Debug.Log("Item Category: " + itm.category);
