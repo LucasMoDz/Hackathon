@@ -51,11 +51,12 @@ public class RSSTester : MonoBehaviour
 
     private void PolishString()
     {
-        string test = "Bella notizia dir&ei";
-        
-        int index = test.IndexOf('&');
-        test = test.Remove(index, 1);
+        string news = "Notizia del Corriere De&ABlla Sera";
+        string charToRemove = "&AB";
 
-        Debug.Log(test);
+        int index = news.IndexOf(charToRemove);
+        news = news.Remove(index, charToRemove.Length);
+
+        Debug.Log(news);
     }
 }
