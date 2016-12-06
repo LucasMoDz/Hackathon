@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class Archive : MonoBehaviour
 {
+    /*
     public List<News> listTrueNews;
     public List<News> listFalseNews;
 
@@ -116,4 +117,5 @@ public class Archive : MonoBehaviour
         listFalseNews.Add(news_15);
         listFalseNews.Add(news_16);
     }
+    */
 }

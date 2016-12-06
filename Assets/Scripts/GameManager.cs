@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 	public List<GameObject> buttonList = new List<GameObject>();
 	public List<GameObject> cellNewsList = new List<GameObject>();
     public List<GameObject> newsChoosed = new List<GameObject>();
+    
 
 	public Canvas canvasMain;
 	public Canvas canvasJournal;
@@ -30,8 +31,7 @@ public class GameManager : MonoBehaviour
         else
             return false;
     }
-
-
+    
 	void Update () {
 		if (newsAttachedCount == 5) {
 			newsAttachedCount = 0;
@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
     {
 		Debug.Log ("FASE SCELTA NEWS FINITA");
 		StartCoroutine(JournalPhase());
-
     }
 
 
@@ -98,7 +97,7 @@ public class GameManager : MonoBehaviour
 	}
 
 
-	public void PointCalculator () {
+	public void PointCalculator() {
 		
 		StartCoroutine(CalcCoroutine());
 

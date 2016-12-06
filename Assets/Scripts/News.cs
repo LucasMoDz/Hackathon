@@ -3,9 +3,9 @@
 [System.Serializable]
 public class News : MonoBehaviour
 {
-    public bool isTrue, isInteresting;
+    //public bool isTrue, isInteresting;
     public string titleNews;
-    public int weight;
+    /*public int weight;
     
     public News(bool _isTrue, bool _isInteresting, string _titleNews)
     {
@@ -13,4 +13,5 @@ public class News : MonoBehaviour
         isInteresting = _isInteresting;
         titleNews = _titleNews;
     }
+    */
 }

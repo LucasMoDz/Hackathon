@@ -3,14 +3,6 @@ using System.Xml;
 
 public class RSSReader
 {
-    private const string RSS_STRING = "rss";
-    private const string CHANNEL_STRING = "channel";
-    private const string ITEM_STRING = "item";
-
-    private const string TITLE_PARAM = "title";
-    private const string LINK_PARAM = "link";
-    private const string DESCRIPTION_PARAM = "description";
-
     XmlTextReader rssReader;
 	XmlDocument xmlDoc;
 
@@ -58,7 +50,7 @@ public class RSSReader
 		for (int i = 0; i < xmlDoc.ChildNodes.Count; i++) 
 		{
 			// Apre la sezione RSS
-			if (xmlDoc.ChildNodes[i].Name == RSS_STRING)
+			if (xmlDoc.ChildNodes[i].Name == "rss")
 				nodeRss = xmlDoc.ChildNodes[i];
 		}
 
@@ -66,19 +58,19 @@ public class RSSReader
 		for (int i = 0; i < nodeRss.ChildNodes.Count; i++)
         {
 			// Apre la sezione Channel
-			if (nodeRss.ChildNodes[i].Name == CHANNEL_STRING)
+			if (nodeRss.ChildNodes[i].Name == "channel")
 				nodeChannel = nodeRss.ChildNodes[i];
 		}
 
 		// Sono le info del Channel
-		channelNews.title = nodeChannel[TITLE_PARAM].InnerText;
-		channelNews.link = nodeChannel[LINK_PARAM].InnerText;
+		channelNews.title = nodeChannel["title"].InnerText;
+		channelNews.link = nodeChannel["link"].InnerText;
 
 		// nodeChannel.ChildNodes.Count è il numero di item presenti nel Feed
 		for (int i = 0; i < nodeChannel.ChildNodes.Count; i++)
         {
             // Confronta il nome dei figli di Channel 
-			if (nodeChannel.ChildNodes[i].Name == ITEM_STRING)
+			if (nodeChannel.ChildNodes[i].Name == "item")
             {
                 // Se è una notizia (item) la mette dentro un nodo
 				nodeItem = nodeChannel.ChildNodes[i];
@@ -87,11 +79,11 @@ public class RSSReader
 				News item = new News();
 
                 // Assegna il titolo della notizia
-				item.title = nodeItem[TITLE_PARAM].InnerText;
+				item.title = nodeItem["title"].InnerText;
                 // Assegna il link della notizia
-				item.link = nodeItem[LINK_PARAM].InnerText;
+				item.link = nodeItem["link"].InnerText;
                 // Assegna la descrizione della notizia
-                item.description = nodeItem[DESCRIPTION_PARAM].InnerText;
+                item.description = nodeItem["description"].InnerText;
 
                 // Aggiunge la notizia creata alla lista di notizie
                 channelNews.newsList.Add(item);

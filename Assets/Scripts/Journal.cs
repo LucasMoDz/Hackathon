@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Journal : MonoBehaviour {
 
+    /*
     public int like, dislike;
     
     GameManager refGM;
@@ -29,4 +30,5 @@ public class Journal : MonoBehaviour {
         else
             like += final;
     }
+    */
 }

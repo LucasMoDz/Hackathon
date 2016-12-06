@@ -14,28 +14,34 @@ public class CoroutineButton : MonoBehaviour
     private float random_second;
     public int randomValue_true;
     public int randomValue_false;
+    RSSReader rssReader;
 
     private void Awake()
     {
         archive = FindObjectOfType<Archive>();
         refCalculator = FindObjectOfType<Calculator>();
         refGM = FindObjectOfType<GameManager>();
-
+        
         random_second = Random.Range(4, 8);
+        rssReader = new RSSReader("http://xml.corriereobjects.it/rss/homepage.xml");
+
+        int nRandom = Random.Range(0, rssReader.channelNews.newsList.Count);
+        this.gameObject.GetComponent<News>().titleNews = rssReader.channelNews.newsList[nRandom].title;
     }
 
-    void Update()
+    /*void Update()
     {
+      
         sizeListFalse = archive.listFalseNews.Count - 1;
         sizeListTrue = archive.listTrueNews.Count - 1;
         
         // Aggiorno i valori random secondo la lunghezza della lista aggiornata
         randomValue_true = Random.Range(0, sizeListTrue);
         randomValue_false = Random.Range(0, sizeListFalse);
-
+       
         
     }
-
+     */
     private void Start()
     {
         StartCoroutine(Spawn());
@@ -65,6 +71,7 @@ public class CoroutineButton : MonoBehaviour
     
     private void ChooseList()
     {
+        /*
         int randomValue = Random.Range(1, 101);
 
         // 70 % scelta lista vera, 30 % scelta lista falsa
@@ -87,5 +94,10 @@ public class CoroutineButton : MonoBehaviour
         
         // Assegno un peso
         refCalculator.CalcNewsValue(this.GetComponent<News>());
+        */
+        
+        int nRandom = Random.Range(0, rssReader.channelNews.newsList.Count);
+        this.gameObject.GetComponent<News>().titleNews = rssReader.channelNews.newsList[nRandom].title.Replace("\n", "").Replace("\r", "").Replace("\t", "");
+        this.gameObject.GetComponentInChildren<Text>().text = this.GetComponent<News>().titleNews;
     }
 }

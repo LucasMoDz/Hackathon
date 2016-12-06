@@ -17,7 +17,7 @@ public class RSSTester : MonoBehaviour
 		{
             //Debug.Log("Item Title: " + news.title);
 			//Debug.Log("Item link: " + news.link);
-			Debug.Log("Item description: " + news.description);
+			//Debug.Log("Item description: " + news.description);
             Debug.Log("\n");
 		}
         

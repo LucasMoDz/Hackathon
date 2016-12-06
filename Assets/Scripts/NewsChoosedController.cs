@@ -24,11 +24,12 @@ public class NewsChoosedController : MonoBehaviour
 
         gm.newsChoosed.Add(EventSystem.current.currentSelectedGameObject.gameObject);
 
+        /*
         if (!EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<News>().isTrue)
             archive.listFalseNews.RemoveAt(EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<CoroutineButton>().randomValue_true);
         else
             archive.listTrueNews.RemoveAt(EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<CoroutineButton>().randomValue_true);
-        
+        */
         EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<CoroutineButton>().StopAllCoroutines();
         
         EventSystem.current.currentSelectedGameObject.GetComponentInChildren<Text>().fontStyle = FontStyle.Bold;

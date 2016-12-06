@@ -18,7 +18,7 @@ public class TimeBar : MonoBehaviour
         StartCoroutine(DecreaseBar());
     }
 
-    private IEnumerator DecreaseBar()
+    public IEnumerator DecreaseBar()
     {
         while (barTime.fillAmount > 0)
         {
