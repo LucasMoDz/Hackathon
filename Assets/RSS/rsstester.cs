@@ -1,7 +1,6 @@
 using UnityEngine;
 
-
-public class rsstester : MonoBehaviour
+public class RSSTester : MonoBehaviour
 {
 	RSSReader rssEconomy, rssSport, rssReport, rssEntertainment;
     
@@ -9,26 +8,22 @@ public class rsstester : MonoBehaviour
 	{
 		// Si collega al FeedRss del Corriere
 		rssEconomy = new RSSReader("http://xml.corriereobjects.it/rss/economia.xml");
-        rssSport = new RSSReader("http://xml.corriereobjects.it/rss/sport.xml");
-        rssReport = new RSSReader("http://xml.corriereobjects.it/rss/cronache.xml");
-        rssEntertainment = new RSSReader("http://xml.corriereobjects.it/rss/spettacoli.xml");
-
-
+        //rssSport = new RSSReader("http://xml.corriereobjects.it/rss/sport.xml");
+        //rssReport = new RSSReader("http://xml.corriereobjects.it/rss/cronache.xml");
+        //rssEntertainment = new RSSReader("http://xml.corriereobjects.it/rss/spettacoli.xml");
+        
         // Stampa le notizie
         foreach (RSSReader.News news in rssEconomy.channelNews.newsList)
 		{
-            
-
-            Debug.Log("Item Title: " + news.title.Replace("\n", "").Replace("\r", "").Replace("\t", ""));
+            //Debug.Log("Item Title: " + news.title);
 			//Debug.Log("Item link: " + news.link);
-			//Debug.Log("Item description: " + news.description);
+			Debug.Log("Item description: " + news.description);
             Debug.Log("\n");
 		}
-
+        
+        /*
         foreach (RSSReader.News news in rssSport.channelNews.newsList)
         {
-            
-
             Debug.Log("Item Title: " + news.title.Replace("\n", "").Replace("\r", "").Replace("\t", ""));
             //Debug.Log("Item link: " + news.link);
             //Debug.Log("Item description: " + news.description);
@@ -37,7 +32,6 @@ public class rsstester : MonoBehaviour
 
         foreach (RSSReader.News news in rssReport.channelNews.newsList)
         {
-            
             Debug.Log("Item Title: " + news.title.Replace("\n", "").Replace("\r", "").Replace("\t", ""));
             //Debug.Log("Item link: " + news.link);
             //Debug.Log("Item description: " + news.description);
@@ -46,7 +40,6 @@ public class rsstester : MonoBehaviour
 
         foreach (RSSReader.News news in rssEntertainment.channelNews.newsList)
         {
-  
             Debug.Log("Item Title: " + news.title.Replace("\n", "").Replace("\r", "").Replace("\t", ""));
             //Debug.Log("Item link: " + news.link);
             //Debug.Log("Item description: " + news.description);
@@ -54,8 +47,9 @@ public class rsstester : MonoBehaviour
         }
 
         PolishString();
+        */
     }
-
+    
     private void PolishString()
     {
         string news = "Notizia del Corriere De&ABlla Sera";
