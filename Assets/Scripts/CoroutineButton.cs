@@ -45,6 +45,11 @@ public class CoroutineButton : MonoBehaviour
     }
     */
 
+	private void OnEnable()
+	{
+		StartCoroutine(Spawn());
+	}
+
     private void Start()
     {
         StartCoroutine(Spawn());

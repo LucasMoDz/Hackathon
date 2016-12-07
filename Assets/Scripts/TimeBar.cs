@@ -15,8 +15,12 @@ public class TimeBar : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(DecreaseBar());
+        //StartCoroutine(DecreaseBar());
     }
+
+	public void DecreaseCo () {
+		StartCoroutine(DecreaseBar());
+	}
 
     public IEnumerator DecreaseBar()
     {

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
 	public List<GameObject> buttonList = new List<GameObject>();
 	public List<GameObject> cellNewsList = new List<GameObject>();
+	public List<GameObject> title_CellList = new List<GameObject>();
     public List<GameObject> newsChoosed = new List<GameObject>();
     
 
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
 
 	public GameObject publishButton;
 	public GameObject descrizioneRoom;
+	public GameObject timerBar;
 
     public int buttonClicked;
     private const int TOTAL_NUMBER_OF_BUTTONS = 5;
@@ -77,19 +79,36 @@ public class GameManager : MonoBehaviour
 
 		//Stoppare le coroutine di tutti i bottoni soprattutto se alcuni non sono stati cliccati
 		//Spostare tutti i bottoni imparentandoli alle celle e assegnandone la stessa dimensione. 
-		//Spegnere ad ogni bottone il component Button e accendere il component Drag & Drop. 
+		//Spegnere ad ogni bottone il component Button e accendere il component Drag & Drop.
+
+		/*
 		for (int i = 0; i <= buttonList.Count-1; i++) {
 			buttonList[i].gameObject.GetComponent<CoroutineButton>().StopAllCoroutines();
 			buttonList[i].gameObject.GetComponent<CoroutineButton>().enabled = false;
 
 			buttonList [i].GetComponent<Button> ().enabled = false;
-			buttonList [i].transform.SetParent (cellNewsList [i].transform);
+			buttonList [i].transform.SetParent (canvasNews.transform);
 			buttonList [i].transform.position = cellNewsList [i].transform.position;
 			buttonList [i].GetComponent<RectTransform> ().sizeDelta = cellNewsList [i].GetComponent<RectTransform> ().sizeDelta;
 			GameObject child = buttonList [i].transform.GetChild(0).gameObject;
 			child.GetComponent<RectTransform> ().sizeDelta = buttonList [i].GetComponent<RectTransform> ().sizeDelta;
 
 			buttonList [i].AddComponent<DragAndDropItem>();
+			Debug.Log ("Il bottone: " + buttonList [i].gameObject.name + " ha completato il setting");
+		}*/
+
+		for (int i = 0; i <= buttonList.Count-1; i++) {
+			buttonList[i].transform.GetChild(0).gameObject.GetComponent<CoroutineButton>().StopAllCoroutines();
+			buttonList[i].transform.GetChild(0).gameObject.GetComponent<CoroutineButton>().enabled = false;
+
+			buttonList [i].transform.GetChild(0).GetComponent<Button> ().enabled = false;
+			buttonList [i].transform.GetChild(0).transform.SetParent (cellNewsList [i].transform);
+			cellNewsList [i].transform.GetChild(0).transform.position = cellNewsList [i].transform.position;
+			cellNewsList [i].transform.GetChild(0).GetComponent<RectTransform> ().sizeDelta = cellNewsList [i].GetComponent<RectTransform> ().sizeDelta;
+			GameObject child = cellNewsList [i].transform.GetChild(0).transform.GetChild(0).gameObject;
+			child.GetComponent<RectTransform> ().sizeDelta = cellNewsList [i].GetComponent<RectTransform> ().sizeDelta;
+
+			cellNewsList [i].transform.GetChild (0).gameObject.GetComponent<DragAndDropItem> ().enabled = true;
 			Debug.Log ("Il bottone: " + buttonList [i].gameObject.name + " ha completato il setting");
 		}
 		canvasNews.gameObject.SetActive(false);
@@ -115,7 +134,7 @@ public class GameManager : MonoBehaviour
 		yield return new WaitForSeconds (1f);
 		canvasJournal.gameObject.SetActive(false);
 
-
+		ResetButtons ();
 
 		//Fa apparire il CanvasMain
 		canvasMain.GetComponent<Fade>().FadeIn();
@@ -137,7 +156,45 @@ public class GameManager : MonoBehaviour
 
 		canvasNews.gameObject.SetActive(true);
 		canvasNews.GetComponent<Fade>().FadeIn();
+		timerBar.GetComponent<TimeBar> ().DecreaseCo ();
 
+	}
+
+
+	public void ResetButtons () {
+		newsChoosed.Clear ();
+		buttonClicked = 0;
+		test = false;
+		timerBar.GetComponent<Image> ().fillAmount = 1;
+
+		for (int i = 0; i <= cellNewsList.Count - 1; i++) {
+			cellNewsList [i].SetActive (true);
+		}
+
+		for (int i = 0; i <= title_CellList.Count - 1; i++) {
+			title_CellList [i].GetComponent<Image>().color = new Color32 (255, 255, 255, 0);
+		}
+
+		publishButton.SetActive (false);
+
+		for (int i = 0; i <= cellNewsList.Count-1; i++) {
+			//cellNewsList[i].transform.GetChild(0).gameObject.GetComponent<CoroutineButton>().StopAllCoroutines();
+
+			title_CellList [i].transform.GetChild(0).transform.SetParent (buttonList [i].transform);
+			buttonList [i].transform.GetChild(0).transform.position = buttonList [i].transform.position;
+			buttonList [i].transform.GetChild(0).GetComponent<RectTransform> ().sizeDelta = buttonList [i].GetComponent<RectTransform> ().sizeDelta;
+			GameObject child = buttonList [i].transform.GetChild(0).transform.GetChild(0).gameObject;
+			child.GetComponent<RectTransform> ().sizeDelta = buttonList [i].GetComponent<RectTransform> ().sizeDelta;
+
+			buttonList [i].transform.GetChild(0).GetComponent<Button> ().enabled = true;
+			buttonList [i].transform.GetChild(0).gameObject.GetComponent<Button>().interactable = true;
+			buttonList [i].transform.GetChild(0).gameObject.GetComponent<CoroutineButton>().enabled = true;
+			buttonList [i].transform.GetChild(0).transform.GetComponentInChildren<Text>().fontStyle = FontStyle.Normal;
+			buttonList [i].transform.GetChild (0).gameObject.GetComponent<News> ().titleNews = "";
+			buttonList [i].transform.GetChild (0).gameObject.GetComponent<DragAndDropItem> ().enabled = false;
+			//cellNewsList [i].transform.GetChild(0).gameObject.AddComponent<DragAndDropItem>();
+			Debug.Log ("Il bottone: " + buttonList [i].gameObject.name + " ha completato il setting");
+		}
 
 	}
 }
