@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class Archive : MonoBehaviour
 {
-    /*
     public List<News> listTrueNews;
     public List<News> listFalseNews;
 
@@ -12,10 +11,11 @@ public class Archive : MonoBehaviour
         listTrueNews = new List<News>();
         listFalseNews = new List<News>();
 
-        AddTrueNews();
+        //AddTrueNews();
         AddFalseNews();
     }
     
+    /*
     private void AddTrueNews()
     {
         News news_1 = new News(true, true, "Renzi: 'Non cacciamo nessuno dal PD'");
@@ -80,6 +80,7 @@ public class Archive : MonoBehaviour
         listTrueNews.Add(news_29);
         listTrueNews.Add(news_30);
     }
+    */
 
     private void AddFalseNews()
     {
@@ -117,5 +118,4 @@ public class Archive : MonoBehaviour
         listFalseNews.Add(news_15);
         listFalseNews.Add(news_16);
     }
-    */
 }
