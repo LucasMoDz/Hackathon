@@ -4,6 +4,7 @@ public class RSSTester : MonoBehaviour
 {
 	RSSReader rssEconomy, rssSport, rssReport, rssEntertainment;
     
+    
     void Start ()
 	{
 		// Si collega al FeedRss del Corriere

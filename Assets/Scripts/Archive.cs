@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 public class Archive : MonoBehaviour
 {
-    public List<News> listTrueNews;
+    //public List<News> listTrueNews;
     public List<News> listFalseNews;
 
     private void Awake()
     {
-        listTrueNews = new List<News>();
+        //listTrueNews = new List<News>();
         listFalseNews = new List<News>();
 
         //AddTrueNews();
@@ -84,22 +84,22 @@ public class Archive : MonoBehaviour
 
     private void AddFalseNews()
     {
-        News news_1 = new News(false, false, "Renzi: 'Berlusconi è un idiota'");
-        News news_2 = new News(false, false, "Il Milan retrocede in serie B");
-        News news_3 = new News(false, false, "Isis attacca Washington, distrutta la Casa Bianca");
-        News news_4 = new News(false, false, "Ricostruito il muro di Berlino");
-        News news_5 = new News(false, false, "Primo uomo sbarcato sul Sole");
-        News news_6 = new News(false, false, "Attacco terroristico a Roma, distrutto il Colosseo");
-        News news_7 = new News(false, false, "Trump diventa presidente degli Stati Uniti");
-        News news_8 = new News(false, false, "Clinton diventa presidente degli Stati Uniti");
-        News news_9 = new News(false, false, "Presentato il nuovo iPhone 8");
-        News news_10 = new News(false, false, "Kim Jong Un dichiara guerra al mondo");
-        News news_11 = new News(false, false, "Valentino Rossi si ritira dalla Moto GP");
-        News news_12 = new News(false, false, "Gli Oasis si riuniscono");
-        News news_13 = new News(false, false, "Lionel Messi passa al Milan");
-        News news_14 = new News(false, false, "Berlusconi: 'Renzi è un idiota'");
-        News news_15 = new News(false, false, "Microsoft, annunciato Windows 11");
-        News news_16 = new News(false, false, "Anonimo: 'Berlusconi e Renzi sono due idioti'");
+        News news_1 = new News(false, "Renzi: 'Berlusconi è un idiota'");
+        News news_2 = new News(false, "Il Milan retrocede in serie B");
+        News news_3 = new News(false, "Isis attacca Washington, distrutta la Casa Bianca");
+        News news_4 = new News(false, "Ricostruito il muro di Berlino");
+        News news_5 = new News(false, "Primo uomo sbarcato sul Sole");
+        News news_6 = new News(false, "Attacco terroristico a Roma, distrutto il Colosseo");
+        News news_7 = new News(false, "Trump diventa presidente degli Stati Uniti");
+        News news_8 = new News(false, "Clinton diventa presidente degli Stati Uniti");
+        News news_9 = new News(false, "Presentato il nuovo iPhone 8");
+        News news_10 = new News(false, "Kim Jong Un dichiara guerra al mondo");
+        News news_11 = new News(false, "Valentino Rossi si ritira dalla Moto GP");
+        News news_12 = new News(false, "Gli Oasis si riuniscono");
+        News news_13 = new News(false, "Lionel Messi passa al Milan");
+        News news_14 = new News(false, "Berlusconi: 'Renzi è un idiota'");
+        News news_15 = new News(false, "Microsoft, annunciato Windows 11");
+        News news_16 = new News(false, "Anonimo: 'Berlusconi e Renzi sono due idioti'");
 
         listFalseNews.Add(news_1);
         listFalseNews.Add(news_2);

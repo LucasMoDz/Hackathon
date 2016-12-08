@@ -3,15 +3,13 @@
 [System.Serializable]
 public class News : MonoBehaviour
 {
-    public bool isTrue; //isInteresting;
+    public bool isTrue;
     public string titleNews;
     //public int weight;
     
-    public News(bool _isTrue, bool _isInteresting, string _titleNews)
+    public News(bool _isTrue, string _titleNews)
     {
         isTrue = _isTrue;
-        //isInteresting = _isInteresting;
         titleNews = _titleNews;
     }
-   
 }
