@@ -103,4 +103,9 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         GetComponent<Image>().enabled = condition;
     }
+
+
+	public void Start () {
+
+	}
 }
