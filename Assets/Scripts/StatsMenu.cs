@@ -63,13 +63,14 @@ public class StatsMenu : MonoBehaviour
         typing.value = type / 1000;
         editing.value = edit / 1000;
         network.value = net / 1000;
-        active = true;
+        
     }
 
     public void ClosePanel()
     {
         panel.gameObject.SetActive(false);
-        
+        active = true;
+
     }
 
     
