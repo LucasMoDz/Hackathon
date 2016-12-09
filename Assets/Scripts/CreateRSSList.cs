@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class CreateRSSList : MonoBehaviour
@@ -19,12 +20,13 @@ public class CreateRSSList : MonoBehaviour
 
         totalNewsList = new List<News>();
     }
-
-    private void Start()
+    
+    IEnumerator Start()
     {
         #region CreationList
 
         connectionRequest = new WWW("http://xml.corriereobjects.it/rss/cronache.xml");
+        yield return connectionRequest;
         readerChronicle = new RSSReader(connectionRequest.url);
 
         foreach (var rssNewsChronicle in readerChronicle.channelNews.newsList)
@@ -38,6 +40,7 @@ public class CreateRSSList : MonoBehaviour
         Debug.Log("Le news di cronaca sono " + readerChronicle.channelNews.newsList.Count);
 
         connectionRequest = new WWW("http://xml.corriereobjects.it/rss/economia.xml");
+        yield return connectionRequest;
         readerEconomy = new RSSReader(connectionRequest.url);
 
         foreach (var rssNewsEconomy in readerEconomy.channelNews.newsList)
@@ -51,6 +54,7 @@ public class CreateRSSList : MonoBehaviour
         Debug.Log("Le news di economia sono " + readerEconomy.channelNews.newsList.Count);
 
         connectionRequest = new WWW("http://xml.corriereobjects.it/rss/sport.xml");
+        yield return connectionRequest;
         readerSport = new RSSReader(connectionRequest.url);
 
         foreach (var rssNewsSport in readerSport.channelNews.newsList)
@@ -64,6 +68,7 @@ public class CreateRSSList : MonoBehaviour
         Debug.Log("Le news di sport sono " + readerSport.channelNews.newsList.Count);
 
         connectionRequest = new WWW("http://xml.corriereobjects.it/rss/spettacoli.xml");
+        yield return connectionRequest;
         readerEntertainment = new RSSReader(connectionRequest.url);
 
         foreach (var rssNewsEntertainment in readerEntertainment.channelNews.newsList)
