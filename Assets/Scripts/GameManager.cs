@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 	public GameObject descrizioneRoom;
 	public GameObject timerBar;
 
+	public GameObject globalLevelSystem;
+
     public int buttonClicked;
     private const int TOTAL_NUMBER_OF_BUTTONS = 5;
 	public int newsAttachedCount;
@@ -142,6 +144,8 @@ public class GameManager : MonoBehaviour
 		canvasMain.GetComponent<CanvasGroup>().interactable = true;
 		canvasMain.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
+		yield return new WaitForSeconds (1f);
+		globalLevelSystem.GetComponent<GlobalLevelSystem> ().IncreaseExp (150);
 	}
 
 
