@@ -37,17 +37,7 @@ public class CoroutineButton : MonoBehaviour
     }
 
     /*
-    void Update()
-    {
-        sizeListFalse = archive.listFalseNews.Count - 1;
-        sizeListTrue = archive.listTrueNews.Count - 1;
-        
-        // Aggiorno i valori random secondo la lunghezza della lista aggiornata
-        randomValue_true = Random.Range(0, sizeListTrue);
-        randomValue_false = Random.Range(0, sizeListFalse);
-    }
     
-
 	private void OnEnable()
 	{
 		StartCoroutine(Spawn());
@@ -58,6 +48,7 @@ public class CoroutineButton : MonoBehaviour
     {
         while (true)
         {
+            Debug.Log("Sto aggiornando i testi dei bottoni");
             // Soltanto la prima volta
             if (!test)
             {
