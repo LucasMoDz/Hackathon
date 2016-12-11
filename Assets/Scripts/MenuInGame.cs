@@ -36,6 +36,7 @@ public class MenuInGame : MonoBehaviour {
     // Esce e torna al Main Menu
     public void Exit()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
         //Debug.Log("Dovrei uscire ma ancora non c'è");
     }
