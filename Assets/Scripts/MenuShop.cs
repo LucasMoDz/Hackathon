@@ -15,7 +15,7 @@ public class MenuShop : MonoBehaviour {
 
     public ShopItem[] ShopItemContainer;
     Button[] buttonArray;
-    Text textItem, priceItem;
+    Text textItem;
     public GameObject panelShop;
     bool isInMenu;
 
@@ -25,10 +25,16 @@ public class MenuShop : MonoBehaviour {
 
         for (int i = 0; i < ShopItemContainer.Length; i++)
         {
+            // Assegna la sprite corrispondente
             buttonArray[i].image.sprite = ShopItemContainer[i].itemSprite;
+            // Prende il testo di ogni bottone...
             textItem = buttonArray[i].GetComponentInChildren<Text>();
-            textItem.GetComponentInChildren<Text>().text = "dick";
+            // ... e ci scrive sopra il nome
             textItem.text = ShopItemContainer[i].itemName;
+            // Prende il prezzo, figlio di ogni nome...
+            
+            // ... e lo setta
+            
         }
     }
 	
