@@ -1,8 +1,11 @@
 using System.Collections.Generic;
 using System.Xml;
+using System;
 
 public class RSSReader
 {
+    bool barassi;
+
     XmlTextReader rssReader;
 	XmlDocument xmlDoc;
 
@@ -15,8 +18,8 @@ public class RSSReader
 	// Channel padre di tutte le news (item)
 	public struct Channel
 	{
-		public string title;
-		public string link;
+		//public string title;
+		//public string link;
 		public List<News> newsList;
 	}
 	
@@ -24,8 +27,9 @@ public class RSSReader
 	public struct News
 	{
 		public string title;
-		public string link;
+		//public string link;
 		public string description;
+        public string linkImage;
 	}	
 	
 	// Costruttore che richiede l'URL come parametro
@@ -63,8 +67,8 @@ public class RSSReader
 		}
 
 		// Sono le info del Channel
-		channelNews.title = nodeChannel["title"].InnerText;
-		channelNews.link = nodeChannel["link"].InnerText;
+		//channelNews.title = nodeChannel["title"].InnerText;
+		//channelNews.link = nodeChannel["link"].InnerText;
 
 		// nodeChannel.ChildNodes.Count è il numero di item presenti nel Feed
 		for (int i = 0; i < nodeChannel.ChildNodes.Count; i++)
@@ -76,18 +80,54 @@ public class RSSReader
 				nodeItem = nodeChannel.ChildNodes[i];
 
                 // Crea una nuova notizia
-				News item = new News();
+                News item = new News();
 
+                /*
+                //item.linkImage = nodeItem["info1"].InnerXml;
+                char[] dirtyLink = nodeItem["info1"].InnerXml.ToCharArray();
+                
+                for (int j = 0; j < dirtyLink.Length; j++)
+                {
+                    if (Char.Equals("\"", dirtyLink[j]) && !barassi)
+                    {
+                        barassi = true;
+                    }
+                    else if (barassi)
+                    {
+                        if (Char.Equals(dirtyLink[j], "\""))
+                            break;
+                        else
+                            item.linkImage += dirtyLink[j];
+                    }
+                }
+                */
+
+                item.linkImage = PolishString(nodeItem["info1"].InnerXml);
+                UnityEngine.Debug.Log(item.linkImage);
                 // Assegna il titolo della notizia
 				item.title = nodeItem["title"].InnerText;
                 // Assegna il link della notizia
-				item.link = nodeItem["link"].InnerText;
+                //item.link = nodeItem["link"].InnerText;
                 // Assegna la descrizione della notizia
                 item.description = nodeItem["description"].InnerText;
 
                 // Aggiunge la notizia creata alla lista di notizie
                 channelNews.newsList.Add(item);
-			}
+            }
 		}
 	}
+
+    private string PolishString(string _dirtyLink)
+    {
+        string charToRemove = "<thumbimage url=\"";
+
+        int index = _dirtyLink.IndexOf(charToRemove);
+        _dirtyLink = _dirtyLink.Remove(index, charToRemove.Length);
+        
+        charToRemove = "\" /><fullimage url=\"";
+        int index_2 = _dirtyLink.IndexOf(charToRemove);
+        _dirtyLink = _dirtyLink.Remove(index_2, charToRemove.Length);
+        
+        return _dirtyLink;
+    }
 }
