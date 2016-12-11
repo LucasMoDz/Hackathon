@@ -118,6 +118,27 @@ public class GameManager : MonoBehaviour
 	}
 
 
+	public IEnumerator PlayCoroutine () {
+		//Starta l'apparizione delle notizie
+		//Spegne il CanvasMain
+		canvasMain.GetComponent<CanvasGroup>().interactable = false;
+		canvasMain.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+		canvasMain.GetComponent<Fade>().FadeOut();
+
+		yield return new WaitForSeconds (1f);
+
+		//esegue il lerp della camera
+		Camera.main.GetComponent<LerpCamera>().ChangeProjection = true;
+
+		canvasNews.gameObject.SetActive(true);
+		canvasNews.GetComponent<Fade>().FadeIn();
+		timerBar.GetComponent<TimeBar> ().DecreaseCo ();
+
+
+	}
+
+
 	public void PointCalculator() {
 		
 		StartCoroutine(CalcCoroutine());
@@ -133,10 +154,19 @@ public class GameManager : MonoBehaviour
 		//Passare i valori all'interfaccia in CanvasResults
 
 		canvasJournal.GetComponent<Fade>().FadeOut();
+
+		//esegue il lerp della camera
+		Camera.main.GetComponent<LerpCamera>().GoForward = false;
+		Camera.main.GetComponent<LerpCamera>().ChangeProjection = true;
+
 		yield return new WaitForSeconds (1f);
+		Camera.main.GetComponent<LerpCamera>().GoForward = true;
+
 		canvasJournal.gameObject.SetActive(false);
 
 		ResetButtons ();
+
+		//yield return new WaitForSeconds (1f);
 
 		//Fa apparire il CanvasMain
 		canvasMain.GetComponent<Fade>().FadeIn();
@@ -146,21 +176,7 @@ public class GameManager : MonoBehaviour
 
 		yield return new WaitForSeconds (1f);
 		globalLevelSystem.GetComponent<GlobalLevelSystem> ().IncreaseExp (150);
-	}
 
-
-	public IEnumerator PlayCoroutine () {
-		//Starta l'apparizione delle notizie
-		//Spegne il CanvasMain
-		canvasMain.GetComponent<CanvasGroup>().interactable = false;
-		canvasMain.GetComponent<CanvasGroup>().blocksRaycasts = false;
-
-		canvasMain.GetComponent<Fade>().FadeOut();
-		yield return new WaitForSeconds (1f);
-
-		canvasNews.gameObject.SetActive(true);
-		canvasNews.GetComponent<Fade>().FadeIn();
-		timerBar.GetComponent<TimeBar> ().DecreaseCo ();
 
 	}
 
@@ -199,6 +215,8 @@ public class GameManager : MonoBehaviour
 			//cellNewsList [i].transform.GetChild(0).gameObject.AddComponent<DragAndDropItem>();
 			Debug.Log ("Il bottone: " + buttonList [i].gameObject.name + " ha completato il setting");
 		}
+
+
 
 	}
 }

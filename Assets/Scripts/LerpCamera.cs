@@ -5,6 +5,8 @@ public class LerpCamera : MonoBehaviour
 {
     private Quaternion targetRot;
     private Vector3 targetPos;
+	private Quaternion originRot;
+	private Vector3 originPos;
 
     public GameObject target;
 
@@ -13,12 +15,30 @@ public class LerpCamera : MonoBehaviour
     
     private const int LERP_SPEED = 5;
     
+	private Camera camera;
+	public float ProjectionChangeTime = 0.5f;
+	public bool ChangeProjection = false;
+
+	public bool GoForward = true;
+
+	private bool _changing = false;
+	private float _currentT = 0.0f;
+
+
+	private void Awake()
+	{
+		camera = Camera.main;
+		originPos = this.transform.position;
+		originRot = this.transform.rotation;
+	}
+
+
     private void Start()
     {
         targetRot = target.transform.rotation;
         targetPos = target.transform.position;
 
-        StartCoroutine(Place(0));
+        //StartCoroutine(Place(0));
     }
     
     private IEnumerator Place(float _seconds)
@@ -27,32 +47,37 @@ public class LerpCamera : MonoBehaviour
 
         while (true)
         {
-            // Save current position and rotation of rotatable object
-            currentPosition = this.transform.position;
-            currentRotation = this.transform.rotation;
+			if(GoForward){
+	            // Save current position and rotation of rotatable object
+	            currentPosition = this.transform.position;
+	            currentRotation = this.transform.rotation;
 
-            // Lerp rotation and position
-            this.transform.rotation = Quaternion.Lerp(currentRotation, targetRot, LERP_SPEED * Time.deltaTime);
-            this.transform.position = Vector3.Lerp(currentPosition, targetPos, LERP_SPEED * Time.deltaTime);
+	            // Lerp rotation and position
+	            this.transform.rotation = Quaternion.Lerp(currentRotation, targetRot, LERP_SPEED * Time.deltaTime);
+	            this.transform.position = Vector3.Lerp(currentPosition, targetPos, LERP_SPEED * Time.deltaTime);
 
-            if ((targetPos - currentPosition).magnitude > 0.05f)
-                yield return null;
-            else
-                yield break;
+	            if ((targetPos - currentPosition).magnitude > 0.05f)
+	                yield return null;
+	            else
+	                yield break;
+			} else {
+				// Save current position and rotation of rotatable object
+				currentPosition = this.transform.position;
+				currentRotation = this.transform.rotation;
+
+				// Lerp rotation and position
+				this.transform.rotation = Quaternion.Lerp(currentRotation, originRot, LERP_SPEED * Time.deltaTime);
+				this.transform.position = Vector3.Lerp(currentPosition, originPos, LERP_SPEED * Time.deltaTime);
+
+				if ((originPos - currentPosition).magnitude > 0.05f)
+					yield return null;
+				else
+					yield break;
+
+			}
         }
     }
     
-    private Camera camera;
-    public float ProjectionChangeTime = 0.5f;
-    public bool ChangeProjection = false;
-
-    private bool _changing = false;
-    private float _currentT = 0.0f;
-
-    private void Awake()
-    {
-        camera = Camera.main;
-    }
      
     private void Update()
     {
@@ -62,6 +87,7 @@ public class LerpCamera : MonoBehaviour
         }
         else if (ChangeProjection)
         {
+			StartCoroutine(Place(0));
             _changing = true;
             _currentT = 0.0f;
         }
