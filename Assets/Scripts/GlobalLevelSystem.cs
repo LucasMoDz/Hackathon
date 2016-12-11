@@ -18,6 +18,7 @@ public class GlobalLevelSystem : MonoBehaviour {
 	public Text nLikeText;
 	public Text nFollowerText;
 
+	float value = 0;
 
 	GameObject canvasUI;
 	//SpriteRenderer feedback;
@@ -30,7 +31,7 @@ public class GlobalLevelSystem : MonoBehaviour {
 	//public int currentStats3;
 
 	public float expToLevelUp;
-	public int expCollected;
+	public float expCollected;
 	//public int startingStats1;
 	//public int startingStats2;
 	//public int startingStats3;
@@ -69,9 +70,24 @@ public class GlobalLevelSystem : MonoBehaviour {
 
 
 	//Metodo chiamato per incrementare gli exp globali del Player
-	public void IncreaseExp(int expToAdd){
-		expCollected += expToAdd;
+	public void IncreaseExp(float expToAdd){
+		//expCollected += expToAdd;
+		StartCoroutine (ExpUp (expToAdd));
 		//StartCoroutine (ExpUIHandler (expToAdd));
+	}
+
+
+	public IEnumerator ExpUp (float exp) {
+		//Debug.Log ("EXP INCREASE PROVA");
+		while (value < exp) 
+		{
+			value += 1f;
+			expCollected += 1f;
+			expBar_Full.GetComponent<Slider> ().value = expCollected;
+			//Debug.Log ("EXP INCREASE: " + expCollected.ToString ());
+			yield return null;
+		} 
+		value = 0;
 	}
 
 
@@ -150,10 +166,11 @@ public class GlobalLevelSystem : MonoBehaviour {
 	{
 
 		//Aggiorna la UI: exp
+	
 
 		playerLevelText.text = ("Lv. " + globalPlayerLevel.ToString());
 
-		expBar_Full.GetComponent<Slider> ().value = expCollected;
+
 
 
 		//Check if the player have reached the required exp to level up
@@ -164,11 +181,14 @@ public class GlobalLevelSystem : MonoBehaviour {
 		}
 
 		//Debug button to level up rapidly
-		if (Input.GetKeyDown (KeyCode.L)) {
+	/*	if (Input.GetKeyDown (KeyCode.L)) {
 			expCollected = (int)expToLevelUp+100;
-		}
+		}*/
 			
-
+		//Debug button to level up rapidly
+		if (Input.GetKeyDown (KeyCode.M)) {
+			IncreaseExp(150);
+		}
 	}
 		
 

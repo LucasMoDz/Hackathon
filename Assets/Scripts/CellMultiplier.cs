@@ -8,6 +8,7 @@ public class CellMultiplier : MonoBehaviour {
 	public bool addBool;
 	public bool subtractBool;
 
+	public int newsPositionID;
 
 	// Use this for initialization
 	void Start ()
