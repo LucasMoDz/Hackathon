@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     public void EndNewsPhase()
     {
 		Debug.Log ("FASE SCELTA NEWS FINITA");
-		StartCoroutine(JournalPhase());
+		StartCoroutine(JournalPhaseNew());
     }
 
 
@@ -115,6 +115,29 @@ public class GameManager : MonoBehaviour
 		}
 		canvasNews.gameObject.SetActive(false);
 
+	}
+
+
+	public IEnumerator JournalPhaseNew () {
+		//Fade Out della schermata di scelta news
+		canvasNews.GetComponent<Fade>().FadeOut();
+		yield return new WaitForSeconds (1f);
+
+		//Fade In della schermata di impaginazione con il giornale
+		canvasJournal.gameObject.SetActive(true);
+		canvasJournal.GetComponent<Fade>().FadeIn();
+
+		for (int i = 0; i <= buttonList.Count - 1; i++) {
+			buttonList [i].transform.GetChild (0).gameObject.GetComponent<CoroutineButton> ().StopAllCoroutines ();
+			buttonList [i].transform.GetChild (0).gameObject.GetComponent<CoroutineButton> ().enabled = false;
+
+			buttonList [i].transform.GetChild (0).GetComponent<Button> ().enabled = false;
+
+			canvasJournal.GetComponent<JournalPhase> ().newsToSelect [i].transform.GetChild (0).GetComponent<Text> ().text = buttonList [i].transform.GetChild (0).transform.GetChild(0).gameObject.GetComponent<Text> ().text;
+
+		}
+
+		canvasNews.gameObject.SetActive(false);
 	}
 
 
