@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.EventSystems;
 
 [Serializable]
 public struct PanelEditors
@@ -12,9 +13,16 @@ public struct PanelEditors
 
 public class MenuEditors : MonoBehaviour
 {
-    public PanelEditors[] editorContainers;
+    public GameObject panelStats;
     public GameObject editorPanel;
-    bool isInMenu;
+
+    StatsMenu refStatsmenu;
+    public PanelEditors[] editorContainers;
+        
+    void Awake()
+    {
+        refStatsmenu = FindObjectOfType<StatsMenu>();
+    }
 
     void Start()
     {
@@ -25,21 +33,11 @@ public class MenuEditors : MonoBehaviour
             editorContainers[i].editorButton.transform.GetChild(2).GetComponent<Text>().text = "Lv. " + editorContainers[i].editorLevel;
         }
     }
-
-    void Update()
+    
+    public void GetStats()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            if (!isInMenu)
-            {
-                editorPanel.SetActive(true);
-                isInMenu = true;
-            }
-            else
-            {
-                editorPanel.SetActive(false);
-                isInMenu = false;
-            }
-        }
+        Stats buttonPressed = EventSystem.current.currentSelectedGameObject.GetComponent<Stats>();
+        panelStats.SetActive(true);
+        refStatsmenu.CallPanel(buttonPressed.name, buttonPressed.level.ToString(), buttonPressed.exp, buttonPressed.research, buttonPressed.typing, buttonPressed.editing, buttonPressed.network);
     }
 }

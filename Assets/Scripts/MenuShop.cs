@@ -15,7 +15,6 @@ public class MenuShop : MonoBehaviour {
 
     public ShopItem[] shopItemContainer;
     public GameObject panelShop;
-    bool isInMenu;
 
 	void Start ()
     {
@@ -26,21 +25,4 @@ public class MenuShop : MonoBehaviour {
             shopItemContainer[i].itemButton.transform.GetChild(2).GetComponent<Text>().text = shopItemContainer[i].itemPrice + "€";
         }
     }
-	
-	void Update ()
-    {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            if (!isInMenu)
-            {
-                panelShop.SetActive(true);
-                isInMenu = true;
-            }
-            else
-            {
-                panelShop.SetActive(false);
-                isInMenu = false;
-            }
-        }
-	}
 }
