@@ -13,22 +13,26 @@ public class Archive : MonoBehaviour
 
     private void AddFalseNews()
     {
-        News news_1 = new News(false, "IOS vende il nuovo iPhone 7 al prezzo di 199€");
-        News news_2 = new News(false, "Il Milan retrocede in serie B");
-        News news_3 = new News(false, "Isis attacca Washington, distrutta la Casa Bianca");
-        News news_4 = new News(false, "Ricostruito il muro di Berlino");
-        News news_5 = new News(false, "Primo uomo sbarcato sul Sole");
-        News news_6 = new News(false, "Attacco terroristico a Roma, distrutto il Colosseo");
-        News news_7 = new News(false, "Uomo più alto del mondo: 2.70m");
-        News news_8 = new News(false, "Clinton diventa presidente degli Stati Uniti");
-        News news_9 = new News(false, "Presentato il nuovo iPhone 8");
-        News news_10 = new News(false, "Kim Jong Un dichiara guerra al mondo");
-        News news_11 = new News(false, "Valentino Rossi si ritira dalla Moto GP");
-        News news_12 = new News(false, "Gli Oasis si riuniscono");
-        News news_13 = new News(false, "Lionel Messi passa al Milan");
-        News news_14 = new News(false, "Cristiano Ronaldo firma per il Virtus Entella");
-        News news_15 = new News(false, "Microsoft, annunciato Windows 11");
-        News news_16 = new News(false, "Ritorno di Loris Capirossi in 125cc");
+        News news_1 = new News(false, "IOS vende il nuovo iPhone 7 al prezzo di 199€", "", "");
+        News news_2 = new News(false, "Il Milan retrocede in serie B", "", "");
+        News news_3 = new News(false, "Isis attacca Washington, distrutta la Casa Bianca", "", "");
+        News news_4 = new News(false, "Ricostruito il muro di Berlino", "", "");
+        News news_5 = new News(false, "Primo uomo sbarcato sul Sole", "", "");
+        News news_6 = new News(false, "Attacco terroristico a Roma, distrutto il Colosseo", "", "");
+        News news_7 = new News(false, "Uomo più alto del mondo: 2.70m", "", "");
+        News news_8 = new News(false, "Clinton diventa presidente degli Stati Uniti", "", "");
+        News news_9 = new News(false, "Presentato il nuovo iPhone 8", "", "");
+        News news_10 = new News(false, "Kim Jong Un dichiara guerra al mondo", "", "");
+        News news_11 = new News(false, "Valentino Rossi si ritira dalla Moto GP", "", "");
+        News news_12 = new News(false, "Gli Oasis si riuniscono", "", "");
+        News news_13 = new News(false, "Lionel Messi passa al Milan", "", "");
+        News news_14 = new News(false, "Cristiano Ronaldo firma per il Virtus Entella", "", "");
+        News news_15 = new News(false, "Microsoft, annunciato Windows 11", "", "");
+        News news_16 = new News(false, "Ritorno di Loris Capirossi in 125cc", "", "");
+        News news_17 = new News(false, "Alessandro Del Piero nuovo allenatore del Milan", "", "");
+        News news_18 = new News(false, "Claudio Bisio è record nei 100m, 9.04'", "", "");
+        News news_19 = new News(false, "Rivelazione shock, si può respirare su Urano", "", "");
+        News news_20 = new News(false, "Disco di Platino per la nuova canzone di Luca Toni", "", "");
 
         #region Add news on list
         listFalseNews.Add(news_1);
@@ -47,6 +51,10 @@ public class Archive : MonoBehaviour
         listFalseNews.Add(news_14);
         listFalseNews.Add(news_15);
         listFalseNews.Add(news_16);
+        listFalseNews.Add(news_17);
+        listFalseNews.Add(news_18);
+        listFalseNews.Add(news_19);
+        listFalseNews.Add(news_20);
         #endregion
     }
 }

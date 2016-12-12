@@ -14,7 +14,7 @@ public class RSSTester : MonoBehaviour
         //rssEntertainment = new RSSReader("http://xml.corriereobjects.it/rss/spettacoli.xml");
         
         // Stampa le notizie
-        foreach (RSSReader.News news in rssEconomy.channelNews.newsList)
+        foreach (RSSReader.News news in rssEconomy.newsList)
 		{
             //Debug.Log("Item Title: " + news.title);
 			//Debug.Log("Item link: " + news.link);

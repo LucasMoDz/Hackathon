@@ -4,30 +4,19 @@ using System;
 
 public class RSSReader
 {
+    public List<News> newsList;
+
+    private XmlTextReader rssReader;
+	private XmlDocument xmlDoc;
+    
+    private XmlNode nodeRss, nodeChannel, nodeItem;
+    
     private int counter;
-
-    XmlTextReader rssReader;
-	XmlDocument xmlDoc;
-
-	XmlNode nodeRss;
-	XmlNode nodeChannel;
-	XmlNode nodeItem;
-
-	public Channel channelNews;
-	
-	// Channel padre di tutte le news (item)
-	public struct Channel
-	{
-		//public string title;
-		//public string link;
-		public List<News> newsList;
-	}
-	
+    
 	// Le info di ogni news
 	public struct News
 	{
 		public string title;
-		//public string link;
 		public string description;
         public string linkImage;
 	}	
@@ -35,11 +24,8 @@ public class RSSReader
 	// Costruttore che richiede l'URL come parametro
 	public RSSReader (string _feedURL)
 	{
-		// Crea nuovo Channel
-		channelNews = new Channel ();
-
-        // Inizializza la lista all'interno della struct Channel
-		channelNews.newsList = new List<News>();
+        // Inizializza la lista delle notizie
+		newsList = new List<News>();
 
         // Crea un nuovo Reader XML
 		rssReader = new XmlTextReader(_feedURL);
@@ -50,8 +36,8 @@ public class RSSReader
         // Carica i dati dell'rssReader
         xmlDoc.Load(rssReader);
 
-		// xmlDoc.ChildNodes.Count è il numero di RSS presente nel Feed
-		for (int i = 0; i < xmlDoc.ChildNodes.Count; i++) 
+        // xmlDoc.ChildNodes.Count è il numero di RSS presente nel Feed
+        for (int i = 0; i < xmlDoc.ChildNodes.Count; i++) 
 		{
 			// Apre la sezione RSS
 			if (xmlDoc.ChildNodes[i].Name == "rss")
@@ -69,16 +55,19 @@ public class RSSReader
 		// nodeChannel.ChildNodes.Count è il numero di item presenti nel Feed
 		for (int i = 0; i < nodeChannel.ChildNodes.Count; i++)
         {
+            // Resetto il contatore per il link dell'immagine
             counter = 0;
+
             // Confronta il nome dei figli di Channel 
 			if (nodeChannel.ChildNodes[i].Name == "item")
             {
                 // Se è una notizia (item) la mette dentro un nodo
 				nodeItem = nodeChannel.ChildNodes[i];
 
-                // Crea una nuova notizia
+                // Crea una nuova notizia (struct)
                 News item = new News();
                 
+                // Pulisce la stringa e ottiene i link delle immagini
                 char[] dirtyLink = nodeItem["info1"].InnerXml.ToCharArray();
                 
                 for (int j = 0; j < dirtyLink.Length; j++)
@@ -92,24 +81,14 @@ public class RSSReader
                         break;
                 }
                 
-                UnityEngine.Debug.Log(item.linkImage);
-                
                 // Assegna il titolo della notizia
 				item.title = nodeItem["title"].InnerText;
                 // Assegna la descrizione della notizia
                 item.description = nodeItem["description"].InnerText;
 
                 // Aggiunge la notizia creata alla lista di notizie
-                channelNews.newsList.Add(item);
+                newsList.Add(item);
             }
 		}
 	}
-
-    private void PolishString(string _dirtyLink)
-    {
-        string charToRemove = "\"";
-
-        int index = _dirtyLink.IndexOf(charToRemove);
-        _dirtyLink = _dirtyLink.Remove(index, charToRemove.Length);
-    }
 }
