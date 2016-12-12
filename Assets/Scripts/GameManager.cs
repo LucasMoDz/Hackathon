@@ -10,10 +10,11 @@ public class GameManager : MonoBehaviour
 	public List<GameObject> title_CellList = new List<GameObject>();
     public List<GameObject> newsChoosed = new List<GameObject>();
     
-
 	public Canvas canvasMain;
 	public Canvas canvasJournal;
 	public Canvas canvasNews;
+
+    private CreateRSSList listRss;
 
 	public GameObject publishButton;
 	public GameObject descrizioneRoom;
@@ -28,6 +29,11 @@ public class GameManager : MonoBehaviour
 	int like, dislike;
 	bool test = false;
 
+    void Awake()
+    {
+        listRss = FindObjectOfType<CreateRSSList>();
+    }
+
     public bool AllButtonsAreClicked()
     {
         if (buttonClicked == TOTAL_NUMBER_OF_BUTTONS)
@@ -36,44 +42,43 @@ public class GameManager : MonoBehaviour
             return false;
     }
     
-	void Update () {
-		if (newsAttachedCount == 5) {
+	void Update ()
+    {
+		if (newsAttachedCount == 5)
+        {
 			newsAttachedCount = 0;
-			for (int i = 0; i <= cellNewsList.Count - 1; i++) {
-				cellNewsList [i].SetActive (false);
-			}
+
+            for (int i = 0; i <= cellNewsList.Count - 1; i++)
+                cellNewsList[i].SetActive(false);
+
 			publishButton.SetActive (true);
 		}
-
 
 		if (AllButtonsAreClicked() && !test)
 		{
 			EndNewsPhase();
 			test = true;
-			//StopAllCoroutines();
 		}
 	}
 
-	public void StartPlay () {
+	public void StartPlay ()
+    {
 		//Chiamato dal bottone start attiva e fa comparire il CanvasNews
-		StartCoroutine(PlayCoroutine());
-
+        if (listRss.newsHaveBeenDownloaded)
+		    StartCoroutine(PlayCoroutine());
 	}
-
-
+    
     public void EndNewsPhase()
     {
-		Debug.Log ("FASE SCELTA NEWS FINITA");
+		//Debug.Log ("FASE SCELTA NEWS FINITA");
 		StartCoroutine(JournalPhaseNew());
     }
-
-
-	public IEnumerator JournalPhase () {
+    
+	public IEnumerator JournalPhase ()
+    {
 		//Fade Out della schermata di scelta news
 		canvasNews.GetComponent<Fade>().FadeOut();
 		yield return new WaitForSeconds (1f);
-
-		//yield return null;
 
 		//Fade In della schermata di impaginazione con il giornale
 		canvasJournal.gameObject.SetActive(true);
@@ -99,7 +104,8 @@ public class GameManager : MonoBehaviour
 			Debug.Log ("Il bottone: " + buttonList [i].gameObject.name + " ha completato il setting");
 		}*/
 
-		for (int i = 0; i <= buttonList.Count-1; i++) {
+		for (int i = 0; i <= buttonList.Count-1; i++)
+        {
 			buttonList[i].transform.GetChild(0).gameObject.GetComponent<CoroutineButton>().StopAllCoroutines();
 			buttonList[i].transform.GetChild(0).gameObject.GetComponent<CoroutineButton>().enabled = false;
 
@@ -111,14 +117,14 @@ public class GameManager : MonoBehaviour
 			child.GetComponent<RectTransform> ().sizeDelta = cellNewsList [i].GetComponent<RectTransform> ().sizeDelta;
 
 			cellNewsList [i].transform.GetChild (0).gameObject.GetComponent<DragAndDropItem> ().enabled = true;
-			Debug.Log ("Il bottone: " + buttonList [i].gameObject.name + " ha completato il setting");
+			//Debug.Log ("Il bottone: " + buttonList [i].gameObject.name + " ha completato il setting");
 		}
+
 		canvasNews.gameObject.SetActive(false);
-
 	}
-
-
-	public IEnumerator JournalPhaseNew () {
+    
+	public IEnumerator JournalPhaseNew ()
+    {
 		//Fade Out della schermata di scelta news
 		canvasNews.GetComponent<Fade>().FadeOut();
 		yield return new WaitForSeconds (1f);
@@ -127,21 +133,21 @@ public class GameManager : MonoBehaviour
 		canvasJournal.gameObject.SetActive(true);
 		canvasJournal.GetComponent<Fade>().FadeIn();
 
-		for (int i = 0; i <= buttonList.Count - 1; i++) {
+		for (int i = 0; i <= buttonList.Count - 1; i++)
+        {
 			buttonList [i].transform.GetChild (0).gameObject.GetComponent<CoroutineButton> ().StopAllCoroutines ();
 			buttonList [i].transform.GetChild (0).gameObject.GetComponent<CoroutineButton> ().enabled = false;
 
 			buttonList [i].transform.GetChild (0).GetComponent<Button> ().enabled = false;
 
 			canvasJournal.GetComponent<JournalPhase> ().newsToSelect [i].transform.GetChild (0).GetComponent<Text> ().text = buttonList [i].transform.GetChild (0).transform.GetChild(0).gameObject.GetComponent<Text> ().text;
-
 		}
 
 		canvasNews.gameObject.SetActive(false);
 	}
-
-
-	public IEnumerator PlayCoroutine () {
+    
+	public IEnumerator PlayCoroutine ()
+    {
 		//Starta l'apparizione delle notizie
 		//Spegne il CanvasMain
 		canvasMain.GetComponent<CanvasGroup>().interactable = false;
@@ -156,26 +162,21 @@ public class GameManager : MonoBehaviour
 
 		canvasNews.gameObject.SetActive(true);
 		canvasNews.GetComponent<Fade>().FadeIn();
-		timerBar.GetComponent<TimeBar> ().DecreaseCo ();
-
-
+		timerBar.GetComponent<TimeBar> ().DecreaseCo();
 	}
-
-
-	public void PointCalculator() {
-		
-		StartCoroutine(CalcCoroutine());
-
+    
+	public void PointCalculator()
+    {
+        StartCoroutine(CalcCoroutine());
 	}
-
-
-	public IEnumerator CalcCoroutine () {
+    
+	public IEnumerator CalcCoroutine ()
+    {
 		//Fade Out del Canvas Journal
 		//Fade In del CanvasResults
 		//Prendere i valori dai bottoni delle news moltiplicarli per il valore multiplier delle celle in cui si trovano
 		//I punteggi positivi andranno in like e quelli negativi in dislike.
 		//Passare i valori all'interfaccia in CanvasResults
-
 		canvasJournal.GetComponent<Fade>().FadeOut();
 
 		//esegue il lerp della camera
@@ -199,30 +200,26 @@ public class GameManager : MonoBehaviour
 
 		yield return new WaitForSeconds (1f);
 		globalLevelSystem.GetComponent<GlobalLevelSystem> ().IncreaseExp (150);
-
-
 	}
 
 
-	public void ResetButtons () {
+	public void ResetButtons ()
+    {
 		newsChoosed.Clear ();
 		buttonClicked = 0;
 		test = false;
 		timerBar.GetComponent<Image> ().fillAmount = 1;
 
-		for (int i = 0; i <= cellNewsList.Count - 1; i++) {
+		for (int i = 0; i <= cellNewsList.Count - 1; i++)
 			cellNewsList [i].SetActive (true);
-		}
 
-		for (int i = 0; i <= title_CellList.Count - 1; i++) {
+		for (int i = 0; i <= title_CellList.Count - 1; i++) 
 			title_CellList [i].GetComponent<Image>().color = new Color32 (255, 255, 255, 0);
-		}
 
 		publishButton.SetActive (false);
 
-		for (int i = 0; i <= cellNewsList.Count-1; i++) {
-			//cellNewsList[i].transform.GetChild(0).gameObject.GetComponent<CoroutineButton>().StopAllCoroutines();
-
+		for (int i = 0; i <= cellNewsList.Count-1; i++)
+        {
 			title_CellList [i].transform.GetChild(0).transform.SetParent (buttonList [i].transform);
 			buttonList [i].transform.GetChild(0).transform.position = buttonList [i].transform.position;
 			buttonList [i].transform.GetChild(0).GetComponent<RectTransform> ().sizeDelta = buttonList [i].GetComponent<RectTransform> ().sizeDelta;
@@ -236,10 +233,7 @@ public class GameManager : MonoBehaviour
 			buttonList [i].transform.GetChild (0).gameObject.GetComponent<News> ().titleNews = "";
 			buttonList [i].transform.GetChild (0).gameObject.GetComponent<DragAndDropItem> ().enabled = false;
 			//cellNewsList [i].transform.GetChild(0).gameObject.AddComponent<DragAndDropItem>();
-			Debug.Log ("Il bottone: " + buttonList [i].gameObject.name + " ha completato il setting");
+			//Debug.Log ("Il bottone: " + buttonList [i].gameObject.name + " ha completato il setting");
 		}
-
-
-
 	}
 }
