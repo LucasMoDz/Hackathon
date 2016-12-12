@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System;
 
-public class Prova : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+public class Prova : MonoBehaviour
+{
+	private void Start ()
+    {
+        string prova = "Sono un ca\"ne";
+        string s = "\"";
+        Debug.Log(s.Length);
+        
+        foreach (var item in prova.ToCharArray())
+        {
+            if (String.Compare("\"", item.ToString()) == 0)
+                Debug.Log("E' uguale");
+        }
+        
 	}
 }
