@@ -23,6 +23,8 @@ public class MenuEditors : MonoBehaviour
         
     void Awake()
     {
+        Debug.Log(this.gameObject);
+
         refStatsmenu = FindObjectOfType<StatsMenu>();
     }
 
