@@ -55,6 +55,8 @@ public class CoroutineButton : MonoBehaviour
         {
             nRandom = Random.Range(0, listRSSCreated.maxNews);
             this.gameObject.GetComponent<News>().titleNews = listRSSCreated.totalNewsList[nRandom].titleNews.Replace("\n", "").Replace("\r", "").Replace("\t", "");
+			this.gameObject.GetComponent<News>().description = listRSSCreated.totalNewsList[nRandom].description.Replace("\n", "").Replace("\r", "").Replace("\t", "");
+			this.gameObject.GetComponent<News>().linkImage = listRSSCreated.totalNewsList[nRandom].linkImage;
         }
         else
         {

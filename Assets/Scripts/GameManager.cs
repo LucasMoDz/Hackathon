@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 	public GameObject publishButton;
 	public GameObject descrizioneRoom;
 	public GameObject timerBar;
+	public GameObject statsPanel;
 
 	public GameObject globalLevelSystem;
 
@@ -140,7 +141,11 @@ public class GameManager : MonoBehaviour
 
 			buttonList [i].transform.GetChild (0).GetComponent<Button> ().enabled = false;
 
-			canvasJournal.GetComponent<JournalPhase> ().newsToSelect [i].transform.GetChild (0).GetComponent<Text> ().text = buttonList [i].transform.GetChild (0).transform.GetChild(0).gameObject.GetComponent<Text> ().text;
+			canvasJournal.GetComponent<JournalPhase> ().newsToSelect [i].GetComponent<News> ().titleNews = buttonList [i].transform.GetChild (0).GetComponent<News> ().titleNews;
+			canvasJournal.GetComponent<JournalPhase> ().newsToSelect [i].GetComponent<News> ().description = buttonList [i].transform.GetChild (0).GetComponent<News> ().description;
+			canvasJournal.GetComponent<JournalPhase> ().newsToSelect [i].GetComponent<News> ().linkImage = buttonList [i].transform.GetChild (0).GetComponent<News> ().linkImage;
+			canvasJournal.GetComponent<JournalPhase> ().newsToSelect [i].transform.GetChild (0).GetComponent<Text> ().text = canvasJournal.GetComponent<JournalPhase> ().newsToSelect [i].GetComponent<News> ().titleNews;
+
 		}
 
 		canvasNews.gameObject.SetActive(false);
@@ -152,7 +157,7 @@ public class GameManager : MonoBehaviour
 		//Spegne il CanvasMain
 		canvasMain.GetComponent<CanvasGroup>().interactable = false;
 		canvasMain.GetComponent<CanvasGroup>().blocksRaycasts = false;
-
+		statsPanel.GetComponent<StatsMenu> ().enabled = false;
 		canvasMain.GetComponent<Fade>().FadeOut();
 
 		yield return new WaitForSeconds (1f);
@@ -224,7 +229,7 @@ public class GameManager : MonoBehaviour
 			canvasJournal.GetComponent<JournalPhase> ().journalPiece [i].transform.GetChild (0).GetComponent<Text> ().text = "Seleziona la notizia";
 			canvasJournal.GetComponent<JournalPhase> ().newsToSelect [i].GetComponent<Button> ().interactable = true;
 		}
-
+		statsPanel.GetComponent<StatsMenu> ().enabled = true;
 	}
 
 	public void ResetButtons ()

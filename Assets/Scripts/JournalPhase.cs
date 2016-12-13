@@ -23,7 +23,9 @@ public class JournalPhase : MonoBehaviour {
 
 	public void OpenNewsTab () {
 		newsSelectionTab.SetActive (true);
-		newsPositionID = EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<NewsID> ().newsPositionID;
+		GameObject buttonClicked = EventSystem.current.currentSelectedGameObject.gameObject;
+		newsPositionID = buttonClicked.GetComponent<NewsID> ().newsPositionID;
+		buttonClicked.GetComponent<Button> ().interactable = false;
 		/*for(int i = 0; i < journalPiece.Length; i++) {
 			if(journalPiece[i].GetComponent<CellMultiplier>().newsPositionID == newsPositionID){
 				journalPiece[i].transform.GetChild(0).GetComponent<Text> ().text = textToPass;
@@ -32,14 +34,18 @@ public class JournalPhase : MonoBehaviour {
 	}
 
 
-	public void SelectionNews () {
+	public void SelectionNews () 
+	{
 		refGM.newsAttachedCount++;
 		newsSelectionTab.SetActive (false);
-		string textToPass = EventSystem.current.currentSelectedGameObject.gameObject.transform.GetChild(0).GetComponent<Text> ().text;
+		GameObject buttonClicked = EventSystem.current.currentSelectedGameObject.gameObject;
+		string textToPass = buttonClicked.transform.GetChild(0).GetComponent<Text> ().text;
+		string descriptionToPass = buttonClicked.transform.GetComponent<News> ().description;
 		EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<Button> ().interactable = false; 
 		for(int i = 0; i < journalPiece.Length; i++) {
 			if(journalPiece[i].GetComponent<NewsID>().newsPositionID == newsPositionID){
 				journalPiece[i].transform.GetChild(0).GetComponent<Text> ().text = textToPass;
+				journalPiece [i].transform.GetChild (1).transform.GetChild (0).GetComponent<Text> ().text = descriptionToPass;
 			}
 		}
 	}
