@@ -9,7 +9,7 @@ public struct PanelEditors
     public string editorName, editorLevel;
     public Sprite editorSprite;
     public Button editorButton;
-    public Stats redattore;
+    //public Stats redattore;
 }
 
 public class MenuEditors : MonoBehaviour
@@ -30,22 +30,12 @@ public class MenuEditors : MonoBehaviour
     {
         for (int i = 0; i < editorContainers.Length; i++)
         {
-            editorContainers[i].editorButton.transform.GetChild(0).GetComponent<Image>().sprite = editorContainers[i].editorSprite;
-            editorContainers[i].editorButton.transform.GetChild(1).GetComponent<Text>().text = editorContainers[i].editorName;
-            editorContainers[i].editorButton.transform.GetChild(2).GetComponent<Text>().text = "Lv. " + editorContainers[i].editorLevel;
+            Stats mioRedattore = editorContainers[i].editorButton.GetComponent<Selector>().redattore.GetComponent<Stats>();
+            editorContainers[i].editorButton.transform.GetChild(0).GetComponent<Image>().sprite = mioRedattore.image;
+            editorContainers[i].editorButton.transform.GetChild(1).GetComponent<Text>().text = mioRedattore.nameof;
+            editorContainers[i].editorButton.transform.GetChild(2).GetComponent<Text>().text = "Lv. " + mioRedattore.level;
         }
     }
 
-    public void GetStats()
-    {
-        Stats buttonPressed = EventSystem.current.currentSelectedGameObject.GetComponent<Stats>();
-        panelStats.SetActive(true);
-        refStatsmenu.CallPanelNew(redattore.GetComponent<Stats>().nameof,
-                            redattore.GetComponent<Stats>().image,
-                            redattore.GetComponent<Stats>().level,
-                            redattore.GetComponent<Stats>().digitale,
-                            redattore.GetComponent<Stats>().typewriting,
-                            redattore.GetComponent<Stats>().graphics,
-                            redattore.GetComponent<Stats>().fama);
-    }
+   
 }
