@@ -14,14 +14,4 @@ public class SponsorLoop : MonoBehaviour
             this.GetComponent<Image>().sprite = sponsorSprites[Random.Range(0, sponsorSprites.Length)];
         }
     }
-
-    private IEnumerator Fade(Image _currentImage)
-    {
-        while (_currentImage.color.a > 0)
-        {
-            float myAlpha = 0;
-            _currentImage.color = new Color(1, 1, 1, myAlpha);
-            yield return new WaitForEndOfFrame();
-        }
-    }
 }
