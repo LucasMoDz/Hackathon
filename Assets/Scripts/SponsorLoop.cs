@@ -19,7 +19,9 @@ public class SponsorLoop : MonoBehaviour
     {
         while (_currentImage.color.a > 0)
         {
-
+            float myAlpha = 0;
+            _currentImage.color = new Color(1, 1, 1, myAlpha);
+            yield return new WaitForEndOfFrame();
         }
     }
 }
