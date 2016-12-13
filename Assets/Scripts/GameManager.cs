@@ -188,7 +188,8 @@ public class GameManager : MonoBehaviour
 
 		canvasJournal.gameObject.SetActive(false);
 
-		ResetButtons ();
+		//ResetButtons ();
+		ResetFlow ();
 
 		//yield return new WaitForSeconds (1f);
 
@@ -202,6 +203,29 @@ public class GameManager : MonoBehaviour
 		globalLevelSystem.GetComponent<GlobalLevelSystem> ().IncreaseExp (150);
 	}
 
+
+	public void ResetFlow ()
+	{
+		newsChoosed.Clear ();
+		buttonClicked = 0;
+		test = false;
+		timerBar.GetComponent<Image> ().fillAmount = 1;
+
+		publishButton.SetActive (false);
+
+		for (int i = 0; i <= cellNewsList.Count-1; i++)
+		{
+			buttonList [i].transform.GetChild(0).GetComponent<Button> ().enabled = true;
+			buttonList [i].transform.GetChild(0).gameObject.GetComponent<Button>().interactable = true;
+			buttonList [i].transform.GetChild(0).gameObject.GetComponent<CoroutineButton>().enabled = true;
+			buttonList [i].transform.GetChild(0).transform.GetComponentInChildren<Text>().fontStyle = FontStyle.Normal;
+			buttonList [i].transform.GetChild (0).gameObject.GetComponent<News> ().titleNews = "";
+
+			canvasJournal.GetComponent<JournalPhase> ().journalPiece [i].transform.GetChild (0).GetComponent<Text> ().text = "Seleziona la notizia";
+			canvasJournal.GetComponent<JournalPhase> ().newsToSelect [i].GetComponent<Button> ().interactable = true;
+		}
+
+	}
 
 	public void ResetButtons ()
     {
@@ -235,5 +259,8 @@ public class GameManager : MonoBehaviour
 			//cellNewsList [i].transform.GetChild(0).gameObject.AddComponent<DragAndDropItem>();
 			//Debug.Log ("Il bottone: " + buttonList [i].gameObject.name + " ha completato il setting");
 		}
+
+
+
 	}
 }

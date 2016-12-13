@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class StatsMenu : MonoBehaviour
 {
-    bool active = true;
+    public bool active = true;
     public RectTransform panel;
     public Text name;
     public Text level;
@@ -33,7 +33,7 @@ public class StatsMenu : MonoBehaviour
             if (Physics.Raycast(ray, out hit) && active)
             {
                
-                if (hit.collider.name == "redattore" && active == true)
+				if (hit.collider.tag == "Redattore" && active == true)
                 {
                         active = false;
                         CallPanel(hit.transform.GetComponent<Stats>().name, 

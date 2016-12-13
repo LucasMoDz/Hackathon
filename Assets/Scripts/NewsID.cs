@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CellMultiplier : MonoBehaviour {
+public class NewsID : MonoBehaviour {
 
 	public int value;
 	private GameManager refGM;
