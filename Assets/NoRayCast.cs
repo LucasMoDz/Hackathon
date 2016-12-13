@@ -5,15 +5,19 @@ public class NoRayCast : MonoBehaviour {
 
     StatsMenu elementi;
 	
+
+	void OnEnable ()
+    {
+		elementi = FindObjectOfType<StatsMenu>();
+        elementi.active = false;
+	}
+
 	void Start () {
 
-        elementi = FindObjectOfType<StatsMenu>();
+	}
 
-            }
-	
-	
-	void Update ()
-    {
-        elementi.active = false;
+	void OnDisable ()
+	{
+		elementi.active = true;
 	}
 }
