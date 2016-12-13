@@ -38,6 +38,6 @@ public class MenuEditors : MonoBehaviour
     {
         Stats buttonPressed = EventSystem.current.currentSelectedGameObject.GetComponent<Stats>();
         panelStats.SetActive(true);
-        refStatsmenu.CallPanel(buttonPressed.name, buttonPressed.level.ToString(), buttonPressed.exp, buttonPressed.research, buttonPressed.typing, buttonPressed.editing, buttonPressed.network);
+        //refStatsmenu.CallPanel(buttonPressed.name, buttonPressed.level.ToString(), buttonPressed.exp, buttonPressed.research, buttonPressed.typing, buttonPressed.editing, buttonPressed.network);
     }
 }

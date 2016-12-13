@@ -3,13 +3,15 @@ using System.Collections;
 
 public class Stats : MonoBehaviour {
 
-    public string name;
+    
+    public string nameof;
+    public Sprite image;
     public int level = 0;
-    public float exp = 0;
-    public float research = 0;
-    public float typing = 0;
-    public float editing = 0;
-    public float network = 0;
+    public float digitale = 0;
+    public float typewriting = 0;
+    public float graphics = 0;
+    public float fama = 0;
+    
 
 
 
