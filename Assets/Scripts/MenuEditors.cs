@@ -9,6 +9,7 @@ public struct PanelEditors
     public string editorName, editorLevel;
     public Sprite editorSprite;
     public Button editorButton;
+    public Stats redattore;
 }
 
 public class MenuEditors : MonoBehaviour
@@ -17,6 +18,7 @@ public class MenuEditors : MonoBehaviour
     public GameObject editorPanel;
 
     StatsMenu refStatsmenu;
+    public GameObject redattore;
     public PanelEditors[] editorContainers;
         
     void Awake()
@@ -33,11 +35,17 @@ public class MenuEditors : MonoBehaviour
             editorContainers[i].editorButton.transform.GetChild(2).GetComponent<Text>().text = "Lv. " + editorContainers[i].editorLevel;
         }
     }
-    
+
     public void GetStats()
     {
         Stats buttonPressed = EventSystem.current.currentSelectedGameObject.GetComponent<Stats>();
         panelStats.SetActive(true);
-        //refStatsmenu.CallPanel(buttonPressed.name, buttonPressed.level.ToString(), buttonPressed.exp, buttonPressed.research, buttonPressed.typing, buttonPressed.editing, buttonPressed.network);
+        refStatsmenu.CallPanelNew(redattore.GetComponent<Stats>().nameof,
+                            redattore.GetComponent<Stats>().image,
+                            redattore.GetComponent<Stats>().level,
+                            redattore.GetComponent<Stats>().digitale,
+                            redattore.GetComponent<Stats>().typewriting,
+                            redattore.GetComponent<Stats>().graphics,
+                            redattore.GetComponent<Stats>().fama);
     }
 }
