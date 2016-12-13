@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 	public Canvas canvasNews;
 
     private CreateRSSList listRss;
+    private CoinAndLikes refCoinsAndLikes;
 
 	public GameObject publishButton;
 	public GameObject descrizioneRoom;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         listRss = FindObjectOfType<CreateRSSList>();
+        refCoinsAndLikes = FindObjectOfType<CoinAndLikes>();
     }
 
     public bool AllButtonsAreClicked()
@@ -206,6 +208,8 @@ public class GameManager : MonoBehaviour
 
 		yield return new WaitForSeconds (1f);
 		globalLevelSystem.GetComponent<GlobalLevelSystem> ().IncreaseExp (150);
+
+        refCoinsAndLikes.SetCoinsAndLikes();
 	}
 
 
