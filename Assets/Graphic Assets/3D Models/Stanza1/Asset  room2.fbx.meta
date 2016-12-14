@@ -42,6 +42,10 @@ ModelImporter:
     100068: Cube.026
     100070: Cube.027
     100072: Cube.056
+    100074: Circle.076
+    100076: Circle.077
+    100078: Cube.047
+    100080: Plane.092
     400000: //RootNode
     400002: Circle
     400004: Circle.000
@@ -79,6 +83,10 @@ ModelImporter:
     400068: Cube.026
     400070: Cube.027
     400072: Cube.056
+    400074: Circle.076
+    400076: Circle.077
+    400078: Cube.047
+    400080: Plane.092
     2300000: Circle
     2300002: Circle.000
     2300004: Circle.004
@@ -113,6 +121,10 @@ ModelImporter:
     2300062: Cube.026
     2300064: Cube.027
     2300066: Cube.056
+    2300068: Circle.076
+    2300070: Circle.077
+    2300072: Cube.047
+    2300074: Plane.092
     3300000: Circle
     3300002: Circle.000
     3300004: Circle.004
@@ -147,6 +159,10 @@ ModelImporter:
     3300062: Cube.026
     3300064: Cube.027
     3300066: Cube.056
+    3300068: Circle.076
+    3300070: Circle.077
+    3300072: Cube.047
+    3300074: Plane.092
     4300000: Plane.023
     4300002: Circle.022
     4300004: Plane.013
@@ -181,6 +197,10 @@ ModelImporter:
     4300062: Cube.056
     4300064: Cube.027
     4300066: Cube.026
+    4300068: Circle.077
+    4300070: Plane.092
+    4300072: Cube.047
+    4300074: Circle.076
   materials:
     importMaterials: 1
     materialName: 0

@@ -20,8 +20,8 @@ public class CoinAndLikes : MonoBehaviour
 
     public void SetCoinsAndLikes()
     {
-        int coinsEarned = Random.Range(20, 200);
-        int likesEarned = Random.Range(200, 1000);
+        int coinsEarned = Random.Range(50, 250);
+        int likesEarned = Random.Range(200, 800);
 
         StartCoroutine(SetCoinsCO(coinsEarned));
         StartCoroutine(SetLikesCO(likesEarned));

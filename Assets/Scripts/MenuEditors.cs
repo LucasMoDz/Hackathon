@@ -18,7 +18,6 @@ public class MenuEditors : MonoBehaviour
     public GameObject editorPanel;
 
     StatsMenu refStatsmenu;
-    public GameObject redattore;
     public PanelEditors[] editorContainers;
         
     void Awake()

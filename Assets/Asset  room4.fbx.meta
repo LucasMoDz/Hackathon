@@ -1,0 +1,208 @@
+fileFormatVersion: 2
+guid: 047594e50a2308a4c906cce4a29ff04b
+timeCreated: 1481676832
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Circle.047
+    100004: Circle.048
+    100006: Circle.049
+    100008: Circle.051
+    100010: Circle.052
+    100012: Circle.053
+    100014: Circle.054
+    100016: Circle.055
+    100018: Circle.056
+    100020: Circle.058
+    100022: Cube.008
+    100024: Cube.060
+    100026: Cube.061
+    100028: Cube.062
+    100030: Cube.063
+    100032: Cube.064
+    100034: Plane.050
+    100036: Plane.051
+    100038: Plane.052
+    100040: Plane.053
+    100042: Plane.054
+    100044: Plane.055
+    100046: Plane.056
+    100048: Plane.057
+    100050: Plane.058
+    100052: Plane.059
+    100054: Plane.060
+    400000: //RootNode
+    400002: Circle.047
+    400004: Circle.048
+    400006: Circle.049
+    400008: Circle.051
+    400010: Circle.052
+    400012: Circle.053
+    400014: Circle.054
+    400016: Circle.055
+    400018: Circle.056
+    400020: Circle.058
+    400022: Cube.008
+    400024: Cube.060
+    400026: Cube.061
+    400028: Cube.062
+    400030: Cube.063
+    400032: Cube.064
+    400034: Plane.050
+    400036: Plane.051
+    400038: Plane.052
+    400040: Plane.053
+    400042: Plane.054
+    400044: Plane.055
+    400046: Plane.056
+    400048: Plane.057
+    400050: Plane.058
+    400052: Plane.059
+    400054: Plane.060
+    2300000: Circle.047
+    2300002: Circle.048
+    2300004: Circle.049
+    2300006: Circle.051
+    2300008: Circle.052
+    2300010: Circle.053
+    2300012: Circle.054
+    2300014: Circle.055
+    2300016: Circle.056
+    2300018: Circle.058
+    2300020: Cube.008
+    2300022: Cube.060
+    2300024: Cube.061
+    2300026: Cube.062
+    2300028: Cube.063
+    2300030: Cube.064
+    2300032: Plane.050
+    2300034: Plane.051
+    2300036: Plane.052
+    2300038: Plane.053
+    2300040: Plane.054
+    2300042: Plane.055
+    2300044: Plane.056
+    2300046: Plane.057
+    2300048: Plane.058
+    2300050: Plane.059
+    2300052: Plane.060
+    3300000: Circle.047
+    3300002: Circle.048
+    3300004: Circle.049
+    3300006: Circle.051
+    3300008: Circle.052
+    3300010: Circle.053
+    3300012: Circle.054
+    3300014: Circle.055
+    3300016: Circle.056
+    3300018: Circle.058
+    3300020: Cube.008
+    3300022: Cube.060
+    3300024: Cube.061
+    3300026: Cube.062
+    3300028: Cube.063
+    3300030: Cube.064
+    3300032: Plane.050
+    3300034: Plane.051
+    3300036: Plane.052
+    3300038: Plane.053
+    3300040: Plane.054
+    3300042: Plane.055
+    3300044: Plane.056
+    3300046: Plane.057
+    3300048: Plane.058
+    3300050: Plane.059
+    3300052: Plane.060
+    4300000: Plane.060
+    4300002: Plane.059
+    4300004: Plane.055
+    4300006: Plane.058
+    4300008: Circle.058
+    4300010: Plane.057
+    4300012: Plane.056
+    4300014: Circle.056
+    4300016: Circle.055
+    4300018: Circle.054
+    4300020: Cube.064
+    4300022: Cube.063
+    4300024: Cube.062
+    4300026: Cube.061
+    4300028: Circle.053
+    4300030: Plane.054
+    4300032: Plane.053
+    4300034: Cube.060
+    4300036: Plane.052
+    4300038: Circle.052
+    4300040: Circle.051
+    4300042: Circle.049
+    4300044: Circle.048
+    4300046: Plane.051
+    4300048: Plane.050
+    4300050: Circle.047
+    4300052: Cube.008
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
