@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public int exp;
+
 	public List<GameObject> buttonList = new List<GameObject>();
 	public List<GameObject> cellNewsList = new List<GameObject>();
 	public List<GameObject> title_CellList = new List<GameObject>();
@@ -13,9 +15,11 @@ public class GameManager : MonoBehaviour
 	public Canvas canvasMain;
 	public Canvas canvasJournal;
 	public Canvas canvasNews;
+    public Canvas canvasRiepilogo;
 
     private CreateRSSList listRss;
     private CoinAndLikes refCoinsAndLikes;
+    RiepilogoManager refRiepilogo;
 
 	public GameObject publishButton;
 	public GameObject descrizioneRoom;
@@ -35,6 +39,7 @@ public class GameManager : MonoBehaviour
     {
         listRss = FindObjectOfType<CreateRSSList>();
         refCoinsAndLikes = FindObjectOfType<CoinAndLikes>();
+        refRiepilogo = FindObjectOfType<RiepilogoManager>();
     }
 
     public bool AllButtonsAreClicked()
@@ -51,8 +56,8 @@ public class GameManager : MonoBehaviour
         {
 			newsAttachedCount = 0;
 
-            for (int i = 0; i <= cellNewsList.Count - 1; i++)
-                cellNewsList[i].SetActive(false);
+            //for (int i = 0; i <= cellNewsList.Count - 1; i++)
+              //  cellNewsList[i].SetActive(false);
 
 			publishButton.SetActive (true);
 		}
@@ -76,8 +81,7 @@ public class GameManager : MonoBehaviour
 		//Debug.Log ("FASE SCELTA NEWS FINITA");
 		StartCoroutine(JournalPhaseNew());
     }
-    
-	public IEnumerator JournalPhase ()
+    	public IEnumerator JournalPhase ()
     {
 		//Fade Out della schermata di scelta news
 		canvasNews.GetComponent<Fade>().FadeOut();
@@ -177,7 +181,34 @@ public class GameManager : MonoBehaviour
         StartCoroutine(CalcCoroutine());
 	}
     
-	public IEnumerator CalcCoroutine ()
+    public void FineRiepilogo()
+    {
+        StartCoroutine(FineRiepilogoCO());
+    }
+
+    IEnumerator FineRiepilogoCO()
+    {
+        statsPanel.GetComponent<StatsMenu>().enabled = true;
+
+        canvasRiepilogo.GetComponent<Fade>().FadeOut();
+        //esegue il lerp della camera
+        Camera.main.GetComponent<LerpCamera>().GoForward = false;
+        Camera.main.GetComponent<LerpCamera>().ChangeProjection = true;
+        yield return new WaitForSeconds(1);
+        Camera.main.GetComponent<LerpCamera>().GoForward = true;
+
+        canvasMain.gameObject.SetActive(true);
+
+        canvasMain.GetComponent<CanvasGroup>().interactable = true;
+        canvasMain.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        canvasMain.GetComponent<Fade>().FadeIn();
+        canvasRiepilogo.gameObject.SetActive(false);
+        globalLevelSystem.GetComponent<GlobalLevelSystem>().IncreaseExp(exp);
+
+        
+    }
+
+	public IEnumerator CalcCoroutine()
     {
 		//Fade Out del Canvas Journal
 		//Fade In del CanvasResults
@@ -185,31 +216,29 @@ public class GameManager : MonoBehaviour
 		//I punteggi positivi andranno in like e quelli negativi in dislike.
 		//Passare i valori all'interfaccia in CanvasResults
 		canvasJournal.GetComponent<Fade>().FadeOut();
-
-		//esegue il lerp della camera
-		Camera.main.GetComponent<LerpCamera>().GoForward = false;
-		Camera.main.GetComponent<LerpCamera>().ChangeProjection = true;
-
-		yield return new WaitForSeconds (1f);
-		Camera.main.GetComponent<LerpCamera>().GoForward = true;
-
-		canvasJournal.gameObject.SetActive(false);
-
+        
 		//ResetButtons ();
 		ResetFlow ();
+        yield return new WaitForSeconds(1f);
+        canvasJournal.gameObject.SetActive(false);
+        //yield return new WaitForSeconds (1f);
 
-		//yield return new WaitForSeconds (1f);
-
-		//Fa apparire il CanvasMain
-		canvasMain.GetComponent<Fade>().FadeIn();
-
-		canvasMain.GetComponent<CanvasGroup>().interactable = true;
-		canvasMain.GetComponent<CanvasGroup>().blocksRaycasts = true;
-
-		yield return new WaitForSeconds (1f);
-		globalLevelSystem.GetComponent<GlobalLevelSystem>().IncreaseExp (150);
-
+        //Fa apparire il CanvasMain
+        //canvasMain.GetComponent<Fade>().FadeIn();
+        canvasRiepilogo.gameObject.SetActive(true);
+        exp = Random.Range(50, 150);
         refCoinsAndLikes.SetCoinsAndLikes();
+        canvasRiepilogo.GetComponent<Fade>().FadeIn();
+
+        refRiepilogo.SetTexts();
+
+        //canvasMain.GetComponent<CanvasGroup>().interactable = true;
+        //canvasMain.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        canvasRiepilogo.GetComponent<CanvasGroup>().interactable = true;
+		canvasRiepilogo.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        yield break;
 	}
 
 	public void ResetFlow()
@@ -236,7 +265,7 @@ public class GameManager : MonoBehaviour
             canvasJournal.GetComponent<JournalPhase>().journalPiece[i].GetComponent<Button>().interactable = true;
         }
 
-		statsPanel.GetComponent<StatsMenu> ().enabled = true;
+		
 	}
 
 	public void ResetButtons ()
