@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class RiepilogoManager : MonoBehaviour
 {
@@ -16,8 +15,8 @@ public class RiepilogoManager : MonoBehaviour
 
    public void SetTexts()
     {
-        textCoins.text = coinsandlikes.coins.ToString();
-        textLikes.text = coinsandlikes.likes.ToString();
+        textCoins.text = coinsandlikes.coinsEarned.ToString();
+        textLikes.text = coinsandlikes.likesEarned.ToString();
         textExp.text = refgm.exp.ToString();
     }
 }

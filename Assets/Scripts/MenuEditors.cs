@@ -22,8 +22,6 @@ public class MenuEditors : MonoBehaviour
         
     void Awake()
     {
-        Debug.Log(this.gameObject);
-
         refStatsmenu = FindObjectOfType<StatsMenu>();
     }
 
@@ -36,7 +34,5 @@ public class MenuEditors : MonoBehaviour
             editorContainers[i].editorButton.transform.GetChild(1).GetComponent<Text>().text = mioRedattore.nameof;
             editorContainers[i].editorButton.transform.GetChild(2).GetComponent<Text>().text = "Lv. " + mioRedattore.level;
         }
-    }
-
-   
+    }  
 }

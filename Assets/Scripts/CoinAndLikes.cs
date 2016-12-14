@@ -5,7 +5,10 @@ using System.Collections;
 public class CoinAndLikes : MonoBehaviour
 {
     public Text coinsText, likesText;
-	public int coins, likes;
+    public int coins = 100;
+    public int likes = 0;
+
+    public int coinsEarned, likesEarned;
     
     private void Awake()
     {
@@ -20,9 +23,12 @@ public class CoinAndLikes : MonoBehaviour
 
     public void SetCoinsAndLikes()
     {
-        int coinsEarned = Random.Range(50, 250);
-        int likesEarned = Random.Range(200, 800);
+        coinsEarned = Random.Range(50, 250);
+        likesEarned = Random.Range(200, 800);
+    }
 
+    public void StartAnimationOfStatistics()
+    {
         StartCoroutine(SetCoinsCO(coinsEarned));
         StartCoroutine(SetLikesCO(likesEarned));
     }
@@ -37,6 +43,7 @@ public class CoinAndLikes : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
+        coinsEarned = 0;
         yield break;
     }
 
@@ -44,12 +51,13 @@ public class CoinAndLikes : MonoBehaviour
     {
         while (_likesEarned > 0)
         {
-            _likesEarned--;
-            likes++;
+            _likesEarned -= 2;
+            likes += 2;
             likesText.text = likes.ToString();
             yield return new WaitForEndOfFrame();
         }
 
+        likesEarned = 0;
         yield break;
     }
 }

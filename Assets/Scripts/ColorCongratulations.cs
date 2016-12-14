@@ -4,12 +4,31 @@ using System.Collections;
 
 public class ColorCongratulations : MonoBehaviour
 {
-	private IEnumerator Start()
+    private float timeLeft;
+    private Color targetColor;
+
+    public void LoopColor()
+    {
+        StartCoroutine(StartLoopColor());
+    }
+
+	private IEnumerator StartLoopColor()
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(0.05f, 0.5f));
-            this.GetComponent<Text>().color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
+            if (timeLeft <= Time.deltaTime)
+            {
+                this.GetComponent<Text>().color = targetColor;
+
+                targetColor = new Color(Random.value, Random.value, Random.value);
+                timeLeft = 1.0f;
+            }
+            else
+            {
+                this.GetComponent<Text>().color = Color.Lerp(this.GetComponent<Text>().color, targetColor, Time.deltaTime / timeLeft);
+                timeLeft -= Time.deltaTime;
+            }
+
             yield return new WaitForEndOfFrame();
         }
     }

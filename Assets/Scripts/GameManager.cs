@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public Text numberOfFollowerText;
+    public int numberOfFollower;
+
     public int exp;
 
 	public List<GameObject> buttonList = new List<GameObject>();
@@ -20,6 +23,7 @@ public class GameManager : MonoBehaviour
     private CreateRSSList listRss;
     private CoinAndLikes refCoinsAndLikes;
     RiepilogoManager refRiepilogo;
+    public ColorCongratulations refColor;
 
 	public GameObject publishButton;
 	public GameObject descrizioneRoom;
@@ -186,6 +190,21 @@ public class GameManager : MonoBehaviour
         StartCoroutine(FineRiepilogoCO());
     }
 
+    IEnumerator AddFollower()
+    {
+        while(true)
+        {
+            Debug.Log("Sto aumentando i follower");
+            yield return new WaitForSeconds(Random.Range(2, 8));
+            numberOfFollower += Random.Range(1, 6);
+            numberOfFollowerText.text = numberOfFollower.ToString();
+            numberOfFollowerText.color = Color.green;
+            yield return new WaitForSeconds(2);
+            numberOfFollowerText.color = Color.black;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
     IEnumerator FineRiepilogoCO()
     {
         statsPanel.GetComponent<StatsMenu>().enabled = true;
@@ -203,9 +222,11 @@ public class GameManager : MonoBehaviour
         canvasMain.GetComponent<CanvasGroup>().blocksRaycasts = true;
         canvasMain.GetComponent<Fade>().FadeIn();
         canvasRiepilogo.gameObject.SetActive(false);
-        globalLevelSystem.GetComponent<GlobalLevelSystem>().IncreaseExp(exp);
 
-        
+        globalLevelSystem.GetComponent<GlobalLevelSystem>().IncreaseExp(exp);
+        refCoinsAndLikes.StartAnimationOfStatistics();
+
+        StartCoroutine(AddFollower());
     }
 
 	public IEnumerator CalcCoroutine()
@@ -217,18 +238,21 @@ public class GameManager : MonoBehaviour
 		//Passare i valori all'interfaccia in CanvasResults
 		canvasJournal.GetComponent<Fade>().FadeOut();
         
-		//ResetButtons ();
-		ResetFlow ();
         yield return new WaitForSeconds(1f);
+        ResetFlow();
         canvasJournal.gameObject.SetActive(false);
         //yield return new WaitForSeconds (1f);
 
         //Fa apparire il CanvasMain
         //canvasMain.GetComponent<Fade>().FadeIn();
         canvasRiepilogo.gameObject.SetActive(true);
+        
+        canvasRiepilogo.GetComponent<Fade>().FadeIn();
+
+        refColor.LoopColor();
+
         exp = Random.Range(50, 150);
         refCoinsAndLikes.SetCoinsAndLikes();
-        canvasRiepilogo.GetComponent<Fade>().FadeIn();
 
         refRiepilogo.SetTexts();
 
