@@ -63,6 +63,8 @@ public class CoroutineButton : MonoBehaviour
             // Lista falsa
             nRandom = Random.Range(0, archive.listFalseNews.Count);
             this.gameObject.GetComponent<News>().titleNews = archive.listFalseNews[nRandom].titleNews;
+            this.gameObject.GetComponent<News>().description = archive.listFalseNews[nRandom].description;
+            this.gameObject.GetComponent<News>().linkImage = archive.listFalseNews[nRandom].linkImage;
         }
 
         this.gameObject.GetComponentInChildren<Text>().text = this.GetComponent<News>().titleNews;

@@ -32,21 +32,30 @@ public class JournalPhase : MonoBehaviour {
 			}
 		}*/
 	}
-
-
-	public void SelectionNews () 
+    
+	public void SelectionNews() 
 	{
 		refGM.newsAttachedCount++;
-		newsSelectionTab.SetActive (false);
+		newsSelectionTab.SetActive(false);
 		GameObject buttonClicked = EventSystem.current.currentSelectedGameObject.gameObject;
 		string textToPass = buttonClicked.transform.GetChild(0).GetComponent<Text> ().text;
-		string descriptionToPass = buttonClicked.transform.GetComponent<News> ().description;
+		string descriptionToPass = buttonClicked.transform.GetComponent<News>().description;
 		EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<Button> ().interactable = false; 
-		for(int i = 0; i < journalPiece.Length; i++) {
-			if(journalPiece[i].GetComponent<NewsID>().newsPositionID == newsPositionID){
-				journalPiece[i].transform.GetChild(0).GetComponent<Text> ().text = textToPass;
-				journalPiece [i].transform.GetChild (1).transform.GetChild (0).GetComponent<Text> ().text = descriptionToPass;
-			}
+
+		for(int i = 0; i < journalPiece.Length; i++)
+        {
+			if(journalPiece[i].GetComponent<NewsID>().newsPositionID == newsPositionID)
+            {
+				journalPiece[i].transform.GetChild(0).GetComponent<Text>().text = textToPass;
+
+                if (descriptionToPass != "")
+                    journalPiece[i].transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = descriptionToPass;
+                else
+                {
+                    journalPiece[i].transform.GetChild(1).gameObject.SetActive(true);
+                    journalPiece[i].transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "";
+                }
+            }
 		}
 	}
 }

@@ -207,13 +207,12 @@ public class GameManager : MonoBehaviour
 		canvasMain.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
 		yield return new WaitForSeconds (1f);
-		globalLevelSystem.GetComponent<GlobalLevelSystem> ().IncreaseExp (150);
+		globalLevelSystem.GetComponent<GlobalLevelSystem>().IncreaseExp (150);
 
         refCoinsAndLikes.SetCoinsAndLikes();
 	}
 
-
-	public void ResetFlow ()
+	public void ResetFlow()
 	{
 		newsChoosed.Clear ();
 		buttonClicked = 0;
@@ -228,11 +227,15 @@ public class GameManager : MonoBehaviour
 			buttonList [i].transform.GetChild(0).gameObject.GetComponent<Button>().interactable = true;
 			buttonList [i].transform.GetChild(0).gameObject.GetComponent<CoroutineButton>().enabled = true;
 			buttonList [i].transform.GetChild(0).transform.GetComponentInChildren<Text>().fontStyle = FontStyle.Normal;
-			buttonList [i].transform.GetChild (0).gameObject.GetComponent<News> ().titleNews = "";
+			// buttonList[i].transform.GetChild(0).gameObject.GetComponent<News> ().titleNews = "";
+            
+            canvasJournal.GetComponent<JournalPhase>().journalPiece[i].transform.GetChild(0).GetComponent<Text>().text = "Seleziona la notizia";
+            canvasJournal.GetComponent<JournalPhase>().journalPiece[i].transform.GetChild(1).gameObject.SetActive(false);
+            canvasJournal.GetComponent<JournalPhase>().journalPiece[i].transform.GetChild(2).transform.GetChild(0).GetComponent<Text>().text = "Description text, descriprion lorem ipsum text description various text ipsum lore. Description text, descriprion lorem ipsum text description various text ipsum lore. Description text, descriprion lorem ipsum text description various text ipsum lore. Description text, descriprion lorem ipsum text description various text ipsum lore.";
+            canvasJournal.GetComponent<JournalPhase>().newsToSelect[i].GetComponent<Button>().interactable = true;
+            canvasJournal.GetComponent<JournalPhase>().journalPiece[i].GetComponent<Button>().interactable = true;
+        }
 
-			canvasJournal.GetComponent<JournalPhase> ().journalPiece [i].transform.GetChild (0).GetComponent<Text> ().text = "Seleziona la notizia";
-			canvasJournal.GetComponent<JournalPhase> ().newsToSelect [i].GetComponent<Button> ().interactable = true;
-		}
 		statsPanel.GetComponent<StatsMenu> ().enabled = true;
 	}
 
@@ -268,8 +271,5 @@ public class GameManager : MonoBehaviour
 			//cellNewsList [i].transform.GetChild(0).gameObject.AddComponent<DragAndDropItem>();
 			//Debug.Log ("Il bottone: " + buttonList [i].gameObject.name + " ha completato il setting");
 		}
-
-
-
 	}
 }

@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
-public class NewsID : MonoBehaviour {
-
+public class NewsID : MonoBehaviour
+{
 	public int value;
 	private GameManager refGM;
 	public bool addBool;
 	public bool subtractBool;
 
 	public int newsPositionID;
-
+    
 	// Use this for initialization
 	void Start ()
     {
