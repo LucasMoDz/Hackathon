@@ -4,6 +4,8 @@ using System.Collections;
 
 public class CoinAndLikes : MonoBehaviour
 {
+    GameManager refgm;
+
     public Text coinsText, likesText;
     public int coins = 100;
     public int likes = 0;
@@ -12,6 +14,8 @@ public class CoinAndLikes : MonoBehaviour
     
     private void Awake()
     {
+        refgm = FindObjectOfType<GameManager>();
+
         DontDestroyOnLoad(this.gameObject);
 
         if (FindObjectsOfType(GetType()).Length > 1)
@@ -24,7 +28,7 @@ public class CoinAndLikes : MonoBehaviour
     public void SetCoinsAndLikes()
     {
         coinsEarned = Random.Range(50, 250);
-        likesEarned = Random.Range(200, 800);
+        likesEarned = Random.Range(1 * (refgm.numberOfFollower + 1), 10 * (refgm.numberOfFollower + 1));
     }
 
     public void StartAnimationOfStatistics()

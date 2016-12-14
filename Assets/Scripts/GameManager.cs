@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    bool firstTime = true;
+
     public Text numberOfFollowerText;
     public int numberOfFollower;
 
@@ -194,8 +196,7 @@ public class GameManager : MonoBehaviour
     {
         while(true)
         {
-            Debug.Log("Sto aumentando i follower");
-            yield return new WaitForSeconds(Random.Range(2, 8));
+            yield return new WaitForSeconds(Random.Range(2, 6));
             numberOfFollower += Random.Range(1, 6);
             numberOfFollowerText.text = numberOfFollower.ToString();
             numberOfFollowerText.color = Color.green;
@@ -226,7 +227,11 @@ public class GameManager : MonoBehaviour
         globalLevelSystem.GetComponent<GlobalLevelSystem>().IncreaseExp(exp);
         refCoinsAndLikes.StartAnimationOfStatistics();
 
-        StartCoroutine(AddFollower());
+        if (firstTime)
+        {
+            StartCoroutine(AddFollower());
+            firstTime = false;
+        }
     }
 
 	public IEnumerator CalcCoroutine()
