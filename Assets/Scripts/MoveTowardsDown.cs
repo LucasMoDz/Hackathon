@@ -9,6 +9,7 @@ public class MoveTowardsDown : MonoBehaviour
     public GameObject panel;
     public Transform targetB;
     public Transform targetA;
+    public byte velocityScroll;
     
 	public void StartMovementOfPanel()
     {
@@ -27,9 +28,9 @@ public class MoveTowardsDown : MonoBehaviour
         moveUp = !moveUp;
         moving = true;
         
-        while ((panel.GetComponent<Transform>().position - targetB.position).magnitude > 5f)
+        while ((panel.GetComponent<Transform>().position - targetB.position).magnitude > 10f)
         {
-            panel.GetComponent<RectTransform>().position -= new Vector3(0, 12);
+            panel.GetComponent<RectTransform>().position -= new Vector3(0, 12) * Time.deltaTime * velocityScroll;
             yield return new WaitForEndOfFrame();
         }
 
@@ -43,9 +44,9 @@ public class MoveTowardsDown : MonoBehaviour
         moveUp = !moveUp;
         moving = true;
 
-        while ((panel.GetComponent<Transform>().position - targetA.position).magnitude > 5f)
+        while ((panel.GetComponent<Transform>().position - targetA.position).magnitude > 10f)
         {
-            panel.GetComponent<RectTransform>().position += new Vector3(0, 12);
+            panel.GetComponent<RectTransform>().position += new Vector3(0, 12) * Time.deltaTime * velocityScroll;
             yield return new WaitForEndOfFrame();
         }
 
