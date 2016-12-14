@@ -254,7 +254,7 @@ public class GameManager : MonoBehaviour
         
         canvasRiepilogo.GetComponent<Fade>().FadeIn();
 
-        refColor.LoopColor();
+        //refColor.LoopColor();
 
         exp = Random.Range(50, 150);
         refCoinsAndLikes.SetCoinsAndLikes();
