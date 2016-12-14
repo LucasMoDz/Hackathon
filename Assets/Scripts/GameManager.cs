@@ -272,4 +272,12 @@ public class GameManager : MonoBehaviour
 			//Debug.Log ("Il bottone: " + buttonList [i].gameObject.name + " ha completato il setting");
 		}
 	}
+
+
+	//ogni volta che si guadagnano monete chiamiamo questo metodo che verifica per ogni item nello 
+	//shop se abbiamo abbastanza monete e in caso attiva il bottone per permettere l'acquisto
+	public void CheckItemBuyable () {
+
+	}
+
 }

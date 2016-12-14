@@ -5,7 +5,7 @@ using System.Collections;
 public class CoinAndLikes : MonoBehaviour
 {
     public Text coinsText, likesText;
-    internal int coins, likes;
+	public int coins, likes;
     
     private void Awake()
     {
