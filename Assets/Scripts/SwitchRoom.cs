@@ -7,7 +7,8 @@ public class SwitchRoom : MonoBehaviour
 {
     private GameManager refGM;
 
-    public Text text;
+	public Text text;
+	public Button playButton;
 
     private GameObject room;
     private int angleRotation = 90;
@@ -28,7 +29,9 @@ public class SwitchRoom : MonoBehaviour
         titleDrafting[3] = "INTRATTENIMENTO";
 
         //text.text = titleDrafting[0];
-        refGM.descrizioneRoom.GetComponent<Text>().text = titleDrafting[0];
+		//text = refGM.descrizioneRoom.GetComponent<Text>();
+        text.text = titleDrafting[0];
+
     }
 
     public void RotateClockwise()
@@ -47,7 +50,7 @@ public class SwitchRoom : MonoBehaviour
     {
         IndexIncrease();
         RefreshTextTite();
-
+		CheckName ();
         while (angleRotation != 0)
         {
             isMoving = true;
@@ -66,7 +69,7 @@ public class SwitchRoom : MonoBehaviour
     {
         IndexDecrease();
         RefreshTextTite();
-
+		CheckName ();
         while (angleRotation != 0)
         {
             isMoving = true;
@@ -102,4 +105,27 @@ public class SwitchRoom : MonoBehaviour
         else
             index = titleDrafting.Length - 1;
     }
+
+	private void CheckName () {
+		if(System.String.Compare(text.text, "GENERALISTA") == 0) {
+			text.transform.parent.GetComponent<Image> ().color = new Color32 (255, 205, 137, 255);
+			playButton.interactable = true;
+		}
+
+		if(System.String.Compare(text.text, "SPORT") == 0) {
+			text.transform.parent.GetComponent<Image> ().color = new Color32 (255, 205, 137, 150);
+			playButton.interactable = false;
+		}
+
+		if(System.String.Compare(text.text, "INTRATTENIMENTO") == 0) {
+			text.transform.parent.GetComponent<Image> ().color = new Color32 (255, 205, 137, 150);
+			playButton.interactable = false;
+		}
+
+		if(System.String.Compare(text.text, "ECONOMIA") == 0) {
+			text.transform.parent.GetComponent<Image> ().color = new Color32 (255, 205, 137, 150);
+			playButton.interactable = false;
+		}
+	}
+
 }

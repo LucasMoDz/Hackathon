@@ -27,7 +27,7 @@ public class CoinAndLikes : MonoBehaviour
 
     public void SetCoinsAndLikes()
     {
-        coinsEarned = Random.Range(50, 250);
+        coinsEarned = Random.Range(20, 100);
         likesEarned = Random.Range(1 * (refgm.numberOfFollower + 1), 10 * (refgm.numberOfFollower + 1));
     }
 
