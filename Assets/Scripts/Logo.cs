@@ -14,9 +14,9 @@ public class Logo : MonoBehaviour {
 
 	IEnumerator WaitAndLoad ()
     {
-		yield return new WaitForSeconds(2.2f);
+		yield return new WaitForSeconds(2f);
 		fadePanel.GetComponent<Fade> ().FadeIn ();
-		yield return new WaitForSeconds (0.8f);
+		yield return new WaitForSeconds (1f);
         SceneManager.LoadScene("MainMenu");
     }
 
