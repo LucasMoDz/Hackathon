@@ -28,8 +28,13 @@ public class MainMenu : MonoBehaviour {
     }
 
 	public IEnumerator FadeToScene () {
-		CanvasFade.GetComponent<Fade> ().FadeIn ();
-		yield return new WaitForSeconds (0.8f);
-		SceneManager.LoadScene("Game_Scena");
+        if (CanvasFade != null)
+        {
+            CanvasFade.GetComponent<Fade>().FadeIn();
+            yield return new WaitForSeconds(0.8f);
+            SceneManager.LoadScene("Game_Scena");
+        }
+
+		
 	}
 } 
