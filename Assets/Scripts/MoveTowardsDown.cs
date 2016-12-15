@@ -9,7 +9,7 @@ public class MoveTowardsDown : MonoBehaviour
     public GameObject panel;
     public Transform targetB;
     public Transform targetA;
-    public byte velocityScroll;
+    public float velocityScroll;
     
 	public void StartMovementOfPanel()
     {
@@ -28,11 +28,11 @@ public class MoveTowardsDown : MonoBehaviour
         moveUp = !moveUp;
         moving = true;
         
-        while ((panel.GetComponent<Transform>().position - targetB.position).magnitude > 30f)
+        while ((panel.GetComponent<Transform>().position - targetB.position).magnitude > 5f)
         {
-            Debug.Log((panel.GetComponent<Transform>().position - targetB.position).magnitude);
-            panel.GetComponent<Transform>().position -= new Vector3(0, 12) * Time.deltaTime * velocityScroll;
-            yield return new WaitForEndOfFrame();
+            float step = velocityScroll * Time.deltaTime;
+            panel.GetComponent<Transform>().position = Vector2.Lerp(panel.GetComponent<Transform>().position, targetB.position, step); //Vector3.MoveTowards(panel.GetComponent<Transform>().position, targetB.position, step);
+            yield return null;
         }
 
         panel.GetComponent<Transform>().position = targetB.position;
@@ -46,11 +46,11 @@ public class MoveTowardsDown : MonoBehaviour
         moveUp = !moveUp;
         moving = true;
 
-        while ((panel.GetComponent<Transform>().position - targetA.position).magnitude > 30f)
+        while ((panel.GetComponent<Transform>().position - targetA.position).magnitude > 5f)
         {
-            Debug.Log((panel.GetComponent<Transform>().position - targetA.position).magnitude);
-            panel.GetComponent<Transform>().position += new Vector3(0, 12) * Time.deltaTime * velocityScroll;
-            yield return new WaitForEndOfFrame();
+            float step = velocityScroll * Time.deltaTime;
+            panel.GetComponent<Transform>().position = Vector2.Lerp(panel.GetComponent<Transform>().position, targetA.position, step);//Vector3.MoveTowards(panel.GetComponent<Transform>().position, targetA.position, step);
+            yield return null;
         }
 
         panel.GetComponent<Transform>().position = targetA.position;
