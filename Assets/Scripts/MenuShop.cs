@@ -22,7 +22,7 @@ public class MenuShop : MonoBehaviour {
         {
             shopItemContainer[i].itemButton.transform.GetChild(0).GetComponent<Image>().sprite = shopItemContainer[i].itemSprite;
             shopItemContainer[i].itemButton.transform.GetChild(1).GetComponent<Text>().text = shopItemContainer[i].itemName;
-            shopItemContainer[i].itemButton.transform.GetChild(2).GetComponent<Text>().text = shopItemContainer[i].itemPrice + "€";
+            shopItemContainer[i].itemButton.transform.GetChild(2).GetComponent<Text>().text = shopItemContainer[i].itemPrice;
         }
     }
 }

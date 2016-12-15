@@ -32,11 +32,15 @@ public class GameManager : MonoBehaviour
 	public GameObject timerBar;
 	public GameObject statsPanel;
 
+	public GameObject fadePanel;
+
 	public GameObject globalLevelSystem;
 
     public int buttonClicked;
     private const int TOTAL_NUMBER_OF_BUTTONS = 5;
 	public int newsAttachedCount;
+
+	public bool FadeOnStart = true;
 
 	int like, dislike;
 	bool test = false;
@@ -46,7 +50,13 @@ public class GameManager : MonoBehaviour
         listRss = FindObjectOfType<CreateRSSList>();
         refCoinsAndLikes = FindObjectOfType<CoinAndLikes>();
         refRiepilogo = FindObjectOfType<RiepilogoManager>();
+
+		if (FadeOnStart) {
+			fadePanel.GetComponent<CanvasGroup> ().alpha = 1;
+			fadePanel.GetComponent<Fade> ().FadeOut ();
+		}
     }
+
 
     public bool AllButtonsAreClicked()
     {

@@ -3,10 +3,13 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
-	
+
+	public GameObject CanvasFade;
+
 	public void NewGame ()
     {
-        SceneManager.LoadScene("Game_Scena");
+		StartCoroutine (FadeToScene ());
+        
 	}
 	
 	
@@ -20,5 +23,9 @@ public class MainMenu : MonoBehaviour {
         SceneManager.LoadScene("MainMenu");
     }
 
-
+	public IEnumerator FadeToScene () {
+		CanvasFade.GetComponent<Fade> ().FadeIn ();
+		yield return new WaitForSeconds (0.8f);
+		SceneManager.LoadScene("Game_Scena");
+	}
 } 
