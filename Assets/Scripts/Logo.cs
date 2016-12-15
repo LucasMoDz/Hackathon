@@ -9,7 +9,7 @@ public class Logo : MonoBehaviour {
     {
         yield return new WaitForSeconds(3f);
 
-        SceneManager.LoadScene("Game_Scena");
+        SceneManager.LoadScene("MainMenu");
     }
 	
     
