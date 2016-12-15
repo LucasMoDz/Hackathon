@@ -6,13 +6,17 @@ public class MainMenu : MonoBehaviour {
 
 	public GameObject CanvasFade;
 
-	public void NewGame ()
-    {
-		StartCoroutine (FadeToScene ());
-        
+	public void Start () {
+		CanvasFade.GetComponent<CanvasGroup> ().alpha = 1;
+		CanvasFade.GetComponent<Fade> ().FadeOut ();
 	}
-	
-	
+
+	public void NewGame ()
+	{
+		StartCoroutine (FadeToScene ());
+
+	}
+
 	public void Credits ()
     {
         SceneManager.LoadScene("Credits");
