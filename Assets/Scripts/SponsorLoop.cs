@@ -7,7 +7,12 @@ public class SponsorLoop : MonoBehaviour
     private int index = 0;
     public Sprite[] sponsorSprites;
     
-    private IEnumerator Start()
+    public void StartLoop()
+    {
+        StartCoroutine(StartLoopCO());
+    }
+
+    private IEnumerator StartLoopCO()
     {
         while (true)
         {

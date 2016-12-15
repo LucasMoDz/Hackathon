@@ -44,7 +44,7 @@ public class MoveTowardsDown : MonoBehaviour
         moveUp = !moveUp;
         moving = true;
 
-        while ((panel.GetComponent<Transform>().position - targetA.position).magnitude > 15f)
+        while ((panel.GetComponent<Transform>().position - targetA.position).magnitude > 20f)
         {
             panel.GetComponent<RectTransform>().position += new Vector3(0, 12) * Time.deltaTime * velocityScroll;
             yield return new WaitForEndOfFrame();

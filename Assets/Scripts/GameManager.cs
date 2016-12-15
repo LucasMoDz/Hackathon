@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public int exp;
 
+    public SponsorLoop[] sponsors;
+
 	public List<GameObject> buttonList = new List<GameObject>();
 	public List<GameObject> cellNewsList = new List<GameObject>();
 	public List<GameObject> title_CellList = new List<GameObject>();
@@ -25,7 +27,6 @@ public class GameManager : MonoBehaviour
     private CreateRSSList listRss;
     private CoinAndLikes refCoinsAndLikes;
     RiepilogoManager refRiepilogo;
-    public ColorCongratulations refColor;
 
 	public GameObject publishButton;
 	public GameObject descrizioneRoom;
@@ -146,15 +147,19 @@ public class GameManager : MonoBehaviour
 		canvasNews.gameObject.SetActive(false);
 	}
     
-	public IEnumerator JournalPhaseNew ()
+	public IEnumerator JournalPhaseNew()
     {
 		//Fade Out della schermata di scelta news
 		canvasNews.GetComponent<Fade>().FadeOut();
 		yield return new WaitForSeconds (1f);
-
+        
 		//Fade In della schermata di impaginazione con il giornale
 		canvasJournal.gameObject.SetActive(true);
-		canvasJournal.GetComponent<Fade>().FadeIn();
+
+        for (int i = 0; i < sponsors.Length; i++)
+            sponsors[i].StartLoop();
+
+        canvasJournal.GetComponent<Fade>().FadeIn();
 
 		for (int i = 0; i <= buttonList.Count - 1; i++)
         {

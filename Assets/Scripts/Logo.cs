@@ -2,19 +2,11 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class Logo : MonoBehaviour {
-
-	
+public class Logo : MonoBehaviour
+{
 	IEnumerator Start ()
     {
-        yield return new WaitForSeconds(3f);
-
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene("MainMenu");
     }
-	
-    
-	
-	void Update () {
-	
-	}
 }
