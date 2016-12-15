@@ -28,12 +28,14 @@ public class MoveTowardsDown : MonoBehaviour
         moveUp = !moveUp;
         moving = true;
         
-        while ((panel.GetComponent<Transform>().position - targetB.position).magnitude > 15f)
+        while ((panel.GetComponent<Transform>().position - targetB.position).magnitude > 30f)
         {
-            panel.GetComponent<RectTransform>().position -= new Vector3(0, 12) * Time.deltaTime * velocityScroll;
+            Debug.Log((panel.GetComponent<Transform>().position - targetB.position).magnitude);
+            panel.GetComponent<Transform>().position -= new Vector3(0, 12) * Time.deltaTime * velocityScroll;
             yield return new WaitForEndOfFrame();
         }
 
+        panel.GetComponent<Transform>().position = targetB.position;
         moving = false;
         yield break;
     }
@@ -44,12 +46,14 @@ public class MoveTowardsDown : MonoBehaviour
         moveUp = !moveUp;
         moving = true;
 
-        while ((panel.GetComponent<Transform>().position - targetA.position).magnitude > 20f)
+        while ((panel.GetComponent<Transform>().position - targetA.position).magnitude > 30f)
         {
-            panel.GetComponent<RectTransform>().position += new Vector3(0, 12) * Time.deltaTime * velocityScroll;
+            Debug.Log((panel.GetComponent<Transform>().position - targetA.position).magnitude);
+            panel.GetComponent<Transform>().position += new Vector3(0, 12) * Time.deltaTime * velocityScroll;
             yield return new WaitForEndOfFrame();
         }
 
+        panel.GetComponent<Transform>().position = targetA.position;
         moving = false;
         yield break;
     }

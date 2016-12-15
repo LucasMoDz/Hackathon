@@ -2,19 +2,19 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour {
+public class MainMenu : MonoBehaviour
+{
+	public GameObject canvasFade;
 
-	public GameObject CanvasFade;
-
-	public void Start () {
-		CanvasFade.GetComponent<CanvasGroup> ().alpha = 1;
-		CanvasFade.GetComponent<Fade> ().FadeOut ();
+	public void Start ()
+    {
+		canvasFade.GetComponent<CanvasGroup> ().alpha = 1;
+		canvasFade.GetComponent<Fade> ().FadeOut ();
 	}
 
 	public void NewGame ()
 	{
-		StartCoroutine (FadeToScene ());
-
+		StartCoroutine(FadeToScene ());
 	}
 
 	public void Credits ()
@@ -27,14 +27,10 @@ public class MainMenu : MonoBehaviour {
         SceneManager.LoadScene("MainMenu");
     }
 
-	public IEnumerator FadeToScene () {
-        if (CanvasFade != null)
-        {
-            CanvasFade.GetComponent<Fade>().FadeIn();
-            yield return new WaitForSeconds(0.8f);
-            SceneManager.LoadScene("Game_Scena");
-        }
-
-		
+	public IEnumerator FadeToScene ()
+    {
+        canvasFade.GetComponent<Fade>().FadeIn();
+        yield return new WaitForSeconds(0.8f);
+        SceneManager.LoadScene("Game_Scena");
 	}
 } 
