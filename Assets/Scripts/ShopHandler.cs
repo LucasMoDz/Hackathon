@@ -1,37 +1,29 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class ShopHandler : MonoBehaviour {
-
-
-	//public GameObject objectToEnable1;
-	//public GameObject objectToEnable2;
-
-	//public int costForObject1;
-	//public int costForObject2;
-
+public class ShopHandler : MonoBehaviour
+{
 	private CoinAndLikes refCoinsAndLikes;
-
-	// Use this for initialization
-	void Start () {
+    
+	void Awake ()
+    {
 		refCoinsAndLikes = FindObjectOfType<CoinAndLikes>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-
-	public void BuyObject (int cost) {
+	public void BuyObject (int cost)
+    {
 		int myCoin = refCoinsAndLikes.GetComponent<CoinAndLikes> ().coins;
-		if (myCoin >= cost) {
-			this.gameObject.SetActive (false);
-			int newCoin = refCoinsAndLikes.GetComponent<CoinAndLikes> ().coins - cost;
-			refCoinsAndLikes.GetComponent<CoinAndLikes> ().coinsText.text = newCoin.ToString ();
 
-		} else {
-			//inserire feedback negativo
+		if (myCoin >= cost)
+        {
+			this.gameObject.SetActive (false);
+
+            Button buttonPressed = EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<Button>();
+            buttonPressed.interactable = false;
+
+            int newCoin = refCoinsAndLikes.GetComponent<CoinAndLikes> ().coins - cost;
+			refCoinsAndLikes.GetComponent<CoinAndLikes> ().coinsText.text = newCoin.ToString ();
 		}
 	}
 }

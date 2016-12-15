@@ -22,9 +22,9 @@ public class SwitchRoom : MonoBehaviour
         room = this.gameObject;
         refGM = FindObjectOfType<GameManager>();
 
-        titleDrafting[0] = "ECONOMIA";
+        titleDrafting[0] = "GENERALISTA";
         titleDrafting[1] = "SPORT";
-        titleDrafting[2] = "CRONACA";
+        titleDrafting[2] = "ECONOMIA";
         titleDrafting[3] = "INTRATTENIMENTO";
 
         //text.text = titleDrafting[0];

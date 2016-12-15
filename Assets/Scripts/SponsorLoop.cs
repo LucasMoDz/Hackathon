@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class SponsorLoop : MonoBehaviour
 {
@@ -9,22 +8,16 @@ public class SponsorLoop : MonoBehaviour
     
     public void StartLoop()
     {
-        StartCoroutine(StartLoopCO());
+        StartLoopCO();
     }
 
-    private IEnumerator StartLoopCO()
+    private void StartLoopCO()
     {
-        while (true)
-        {
-            this.GetComponent<Image>().sprite = sponsorSprites[index];
-            yield return new WaitForSeconds(Random.Range(3, 6));
+        this.GetComponent<Image>().sprite = sponsorSprites[index];
 
-            if (index < sponsorSprites.Length -1)
-                index++;
-            else
-                index = 0;
-
-            yield return new WaitForEndOfFrame();
-        }
+        if (index < sponsorSprites.Length -1)
+            index++;
+        else
+            index = 0;
     }
 }

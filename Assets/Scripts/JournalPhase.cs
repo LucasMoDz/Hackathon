@@ -37,10 +37,11 @@ public class JournalPhase : MonoBehaviour {
 	{
 		refGM.newsAttachedCount++;
 		newsSelectionTab.SetActive(false);
-		GameObject buttonClicked = EventSystem.current.currentSelectedGameObject.gameObject;
+        Button buttonClicked = EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<Button>();
 		string textToPass = buttonClicked.transform.GetChild(0).GetComponent<Text> ().text;
 		string descriptionToPass = buttonClicked.transform.GetComponent<News>().description;
-		EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<Button> ().interactable = false; 
+		buttonClicked.interactable = false;
+        buttonClicked.transform.GetChild(0).GetComponent<Text>().fontStyle = FontStyle.Bold;
 
 		for(int i = 0; i < journalPiece.Length; i++)
         {
